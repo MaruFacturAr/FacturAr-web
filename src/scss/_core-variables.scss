@@ -1,0 +1,25 @@
+// Sidebar
+$sidebar-width: 250px;
+$sidebar-bg: #DDDDDD;
+$mobile-sidebar-width: 250px;
+// core overrides
+$border-color: $gray-200;
+// Navbar
+$navbar-height: 60px;
+$navbar-brand-width: 250px;
+$navbar-brand-bg: #D80E70;
+$navbar-brand-logo-size: 55%;
+$navbar-brand-border: ( bottom: ( size: 1px, style: solid, color:darken($sidebar-bg, 5%)));
+$navbar-color: $gray-300;
+$navbar-hover-color: darken($navbar-color, 10%);
+$navbar-active-color: darken($navbar-color, 20%);
+$navbar-disabled-color: lighter($navbar-color, 20%);
+// Sidebar Navigation
+$sidebar-nav-title-padding-y: .95rem;
+$sidebar-nav-title-color: $text-muted;
+$sidebar-nav-link-hover-bg: darken($sidebar-bg, 5%);
+$sidebar-nav-link-active-bg: darken($sidebar-bg, 5%);
+$sidebar-nav-dropdown-bg: darken($sidebar-bg, 3%);
+// Breadcrumb
+$breadcrumb-margin: 0;
+$breadcrumb-borders: 0;

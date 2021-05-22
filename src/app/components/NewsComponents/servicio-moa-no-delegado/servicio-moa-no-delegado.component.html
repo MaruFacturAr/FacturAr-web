@@ -1,0 +1,21 @@
+<div class="modal-body bg-gray">
+    <div class="row pt-5" *ngIf="!showInstructivoAFIP">
+        <div class="col text-center">
+            <img src='../../../../assets/img/notificacion-moa.png' class="img-fluid">
+            <p class="cmx-text-news my-4">El servicio de Mis Operaciones Aduaneras<br />en AFIP aún no fue delegado.</p>
+            <p class="cmx-text-news mt-5">¿Cómo hago para delegarlo?</p>
+            <button type="button" class="btn btn-light" (click)="openInstructivo()">Acceder al instructivo</button>
+            <p class="cmx-text-news mt-4 mb-3 font-lg">Una vez delegado vas a tener acceso a todas tus operaciones aduaneras directamente en el SRD Comex.</p>
+        </div>
+    </div>
+    <div class="embed-responsive embed-responsive-16by9" *ngIf="showInstructivoAFIP">
+        <iframe class="embed-responsive-item" src="https://serviciosweb.afip.gob.ar/genericos/guiasPasoPaso/VerGuia.aspx?id=160"></iframe>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="chkNoShow" value="noShow" [(ngModel)]="chkNoShowAgain">
+        <label class="form-check-label" for="chkNoShow">No volver a mostrar esta notificación</label>
+    </div>
+    <button type="button" class="btn btn-primary btn-sm" (click)="closeModal()">Cerrar</button>
+</div>

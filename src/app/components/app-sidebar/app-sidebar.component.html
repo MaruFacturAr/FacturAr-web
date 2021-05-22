@@ -1,0 +1,23 @@
+<div class="sidebar">
+
+    <nav class="sidebar-nav ps ps--active-y">
+        <ul class="nav">
+            <li class="nav-title text-center" *appHasRole='["A","800"]'><span>Mi Negocio</span></li>
+            <li class="nav-item" *appHasRole='["A","800"]'>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/declaraciones']">
+                    <i class="fas fa-file-invoice"></i> Datos Facturación
+                </a>
+            </li>
+            <li class="nav-item" *appHasRole='["A","800"]'>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/declaraciones']">
+                    <i class="fas fa-user"></i> Clientes
+                </a>
+            </li>
+            <li class="nav-item" *appHasRole='["A","800"]'>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/declaraciones']">
+                    <i class="fas fa-archive"></i> Productos
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

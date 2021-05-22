@@ -1,0 +1,388 @@
+
+    <!-- <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed?v=FMc78dl2mio" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div> -->
+   
+        <div class="col">
+            <div class="card-columns">
+                <div class="card" *appHasRole='["A","D","X","103","104"]'>
+                    <h5 class="card-header formTitle">
+                        <i class="fas fa-newspaper mr-2"></i> Guía
+                    </h5>
+                    <div class="card-body">
+        
+                        <accordion>
+                            <accordion-group heading="Crear">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/guias/ingreso']"> Nueva Guía</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar Operaciones</strong>
+                                    </li>
+                                    <li>
+                                        En la sección
+                                        <strong>Operaciones Disponibles</strong> arrastrar la operacion a
+                                        <strong>Operaciones Seleccionadas</strong>
+                                    </li>
+                                    <li>
+                                        Presionar
+                                        <strong>Guardar Progreso</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                            <accordion-group heading="Editar">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/guias/consulta']">Consultar</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+                                    <li>
+                                        En la grilla, seleccionar una guía en estado
+                                        <strong>Emitida</strong>
+                                    </li>
+                                    <li>
+                                        Ir hasta la última columna y presionar los
+                                        <strong>3 puntitos</strong>
+                                    </li>
+                                    <li>
+                                        Desde submenú desplegable, presionar
+                                        <strong>Modificar</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                            <accordion-group heading="Confirmar">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/guias/ingreso']">Nueva Guía</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar Operaciones</strong>
+                                    </li>
+                                    <li>
+                                        En la sección
+                                        <strong>Operaciones Disponibles</strong> arrastrar la operacion a
+                                        <strong>Operaciones Seleccionadas</strong>
+                                    </li>
+                                    <li>
+                                        Presionar
+                                        <strong>Continuar</strong>
+                                    </li>
+                                    <li>
+                                        Completar
+                                        <strong>Número Interno</strong>,
+                                        <strong>Descripción</strong> y
+                                        <strong>CUIT Importador</strong> -en caso de ser una operación REM-
+                                    </li>
+                                    <li>
+                                        Presionar
+                                        <strong>Confirmar Guía</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                            <accordion-group heading="Consultar">
+        
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/guias/consulta']">Consultar</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                        </accordion>
+        
+                    </div>
+                </div>
+        
+                <div class="card" *appHasRole='["A","2","5"]'>
+                    <h5 class="card-header formTitle">
+                        <i class="fas fa-globe mr-2"></i> Despachos
+                    </h5>
+                    <div class="card-body">
+        
+                        <accordion>
+                            <accordion-group heading="Mis Despachos">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/despachos/misdespachos']"> Mis Despachos</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+        
+                                </ol>
+                            </accordion-group>
+                            <accordion-group heading="Ver Mis Despachos">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/despachos/misdespachos']"> Mis Despachos</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+                                    <li>
+                                        En la grilla, seleccionar un despacho en estado
+                                        <strong>DIGI</strong>
+                                    </li>
+                                    <li>
+                                        Ir hasta la última columna y presionar sobre el
+                                        <strong>icono PDF</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                            <accordion-group heading="Solicitar Documento Original">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/despachos/solicitaroriginal']">Solicitar Documento Original</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un despacho y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+                                    <li>
+                                        En el formulario seleccionar
+                                        <strong>tipo consulta</strong> - si es reingreso, ingresar
+                                        <strong>fecha de reingreso</strong>-,
+                                        <strong>contacto</strong> y
+                                        <strong>motivo</strong>
+                                    </li>
+                                    <li>
+                                        Presionar
+                                        <strong>Enviar Solicitud</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                            <accordion-group heading="Solicitudes Pendientes">
+        
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/despachos/solicitaroriginal/pendientes']">Solicitudes Pendientes</a>
+                                    </li>
+        
+                                </ol>
+                            </accordion-group>
+                        </accordion>
+        
+                    </div>
+                </div>
+                <div class="card" *appHasRole='["A","725", "723", "732"]'>
+                    <h5 class="card-header formTitle">
+                        <i class="fas fa-file-alt mr-2"></i> Reportes
+                    </h5>
+                    <div class="card-body">
+        
+                        <accordion>
+                            <accordion-group heading="Débitos">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/reportedebitos']"> Débitos></a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+        
+                                </ol>
+                            </accordion-group>
+                            <accordion-group heading="Deuda">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/reportedeuda']">Deuda</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                            <accordion-group heading="Ver Factura">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/reportedeuda']">Deuda</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+                                    <li>
+                                        En la grilla, seleccionar un despacho
+                                    </li>
+                                    <li>
+                                        Ir hasta la última columna y presionar sobre el
+                                        <strong>icono PDF</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                            <accordion-group heading="Vencimiento PSAD">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/reportevtopsad']">Vencimiento PSAD</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+        
+                        </accordion>
+        
+                    </div>
+                </div>
+        
+                <div class="card" *appHasRole='["A","607","709"]'>
+                    <h5 class="card-header formTitle">
+                        <i class="fas fa-box mr-2"> </i> Cajas Especiales
+                    </h5>
+                    <div class="card-body">
+        
+                        <accordion>
+                            <accordion-group heading="Consultar Caja">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/cajasespeciales/consulta']">Consultar Caja</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                            <accordion-group heading="Solicitar Caja">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a
+                                        <a [routerLink]="['/cajasespeciales/consulta']">Consultar Caja</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+                                    <li>
+                                        En la grilla, seleccionar una caja
+                                    </li>
+                                    <li>
+                                        Ir hasta la última columna y presionar sobre el
+                                        <strong>icono Caja</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                            <accordion-group heading="Solicitudes">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a <a [routerLink]="['/cajasespeciales/solicitudes']">Solicitudes</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un criterio de búsqueda y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                        </accordion>
+        
+                    </div>
+                </div>
+        
+                <div class="card" *appHasRole='["A","21"]'>
+                    <h5 class="card-header formTitle">
+                        <i class="fas fa-tasks mr-2"></i> Herramientas
+                    </h5>
+                    <div class="card-body">
+        
+                        <accordion>
+                            <accordion-group heading="Estado Afip">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a <a [routerLink]="['/estadoafip']">Estado Afip</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un Despacho y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                        </accordion>
+        
+                    </div>
+                </div>
+                <div class="card" *appHasRole='["A","725","D"]'>
+                    <h5 class="card-header formTitle">
+                        <i class="fas fa-lock mr-2"></i> Gestión de Accesos
+                    </h5>
+                    <div class="card-body">
+        
+                        <accordion>
+                            <accordion-group heading="Accesos clientes">
+                                <p> Desde el menú izquierdo de la pantalla
+                                </p>
+                                <ol>
+                                    <li>
+                                        Ir a <a [routerLink]="['/gestionaccesos/consulta']">Accesos clientes</a>
+                                    </li>
+                                    <li>
+                                        Ingresar un Importador/exportador o ninguno y presionar
+                                        <strong>Buscar</strong>
+                                    </li>
+                                </ol>
+                            </accordion-group>
+                        </accordion>
+        
+                    </div>
+                </div>
+            </div>
+        </div>

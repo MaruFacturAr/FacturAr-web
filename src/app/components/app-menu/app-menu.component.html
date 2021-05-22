@@ -1,0 +1,9 @@
+<nav class="card-menu navbar navbar-expand-lg navbar-light">
+    <div class="navbar-collapse">
+        <div class="navbar-nav">
+            <ng-container *ngFor="let item of menuItems">
+                <a class="nav-item nav-link" *ngIf="item.show" (click)="item.onClick()"><i class="fas {{item.icon}} mr-1"></i> {{item.text}}</a>
+            </ng-container>
+        </div>
+    </div>
+</nav>

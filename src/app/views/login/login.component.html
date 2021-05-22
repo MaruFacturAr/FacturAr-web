@@ -1,0 +1,131 @@
+<link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400&display=swap" rel="stylesheet">
+<div *ngIf="!tokenJWT">
+        <div class="sidenav d-none d-md-block">
+            <div class="sidenav__info">
+                <img src="~/../assets/img/facturar-iso.png" class="mb-3" />
+                <h1 class="login-text">Bienvenido al</h1>
+                <h1 class="login-text__bold">Sistema<br/>de Facturación Electrónica</h1>
+            </div>
+        </div>
+        <div class="login-main">
+            <div class="row justify-content-center login-main-flow">
+                <div class="col-9">
+                    <div class="login-form">
+                        <!-- <img src="~/../assets/img/logo-chico.png" class="isologo" /> -->
+                        <h2 class="iniciar-sesion">Iniciar sesión</h2>
+    
+                        <form  class="signinUp" [formGroup]="loginForm" (ngSubmit)="signIn()">
+    
+                            <div class="row">
+                                <div class="col-lg-9 col-md-10">
+    
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" id="cuit" placeholder="Tu nombre de usuario" formControlName="username" class="input-text" />
+                                        </div>
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="password" placeholder="Tu Contraseña" formControlName="password" class="input-text"  />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input id="chkRedordarMisDatos" type="checkbox" class="checkCointainer" (change)="onChangeRememberMe()" />
+                                            <label for="chkRedordarMisDatos" class="rememberInfoLogin" >Recordar mis datos </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                            <button *ngIf="!loading" class="btn btn-login btn-block" [disabled]="loginForm.invalid">Ingresar</button>                                                
+                                    </div>
+                                    <div class="spinner" *ngIf="loading">
+                                        <div class="rect1"></div>
+                                        <div class="rect2"></div>
+                                        <div class="rect3"></div>
+                                        <div class="rect4"></div>
+                                        <div class="rect5"></div>
+                                    </div>    
+                                </div>
+                            </div>                        
+                        </form>
+
+                        <!-- Login con renovación de Password -->
+                        <!-- <form *ngIf="passRenew" class="signinUp" [formGroup]="passRenewForm" (submit)="signInWithPassRenew()">
+                            <div class="row">
+                                <div class="col-lg-9 col-md-10">    
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input placeholder="Usuario" formControlName="cuit" id="cuit" class="input-text" autocomplete="off" />
+                                        </div>
+                                    </div>
+                                    <div formGroupName="passwordGroup">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="password" placeholder="Ingrese Nueva Contraseña" formControlName="Password" id="Password" class="input-text"  />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="password" placeholder="Repita Nueva Contraseña" formControlName="Password2" id="Password2" class="input-text" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                        
+                                            <div class="input-group">
+                                                <button class="btn btn-login btn-block" type="submit" [disabled]="!passRenewForm.valid">Iniciar sesión</button>
+                                                <button class="btn btn-login btn-block" [routerLink]="['/']">Volver</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>            
+                            </div>
+                        </form> -->
+                        <div class="signinDown">
+
+                            <div >
+
+                                <!-- <p *ngIf="!showChangePass" class="m-0">
+                                    <a href="javascript:void(0)" (click)="onClickForgotPassword()">Olvidé mi contraseña</a>
+                                </p>
+
+                                <p *ngIf="showChangePass" class="m-0">
+                                    <a href="javascript:void(0)" (click)="onClickForgotPassword()">Olvidé mi contraseña</a>
+                                </p> -->
+
+                               
+
+                                <p class="m-0">
+                                    <a href="javascript:void(0)" (click)="onClickRegister()">Crear cuenta</a>
+                                </p>
+
+                                <app-user-register *ngIf="isSettings" [open]="isSettings" (close)="onSettingsClose($event)"></app-user-register>
+
+                                <form *ngIf="showForgotPassword" class="signinUp" [formGroup]="forgotPasswordForm" (ngSubmit)="forgotPassword()" class="mt-4">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <input class="input-text" placeholder="Tu número de CUIT" formControlName="cuit" id="cuit">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-9">
+                                            <button type="submit" class="btn btn-login" [disabled]="!forgotPasswordForm.valid">Cambiar</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="app-footer-login my-5">
+                    <!-- <div class="row justify-content-center">
+                        <div class="col-9">
+                            <img src="~/../assets/img/logo-chico.png" />
+                        </div>
+                    </div> -->
+                </div>
+        </div>
+    </div>

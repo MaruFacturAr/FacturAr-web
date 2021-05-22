@@ -1,0 +1,25 @@
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins/breakpoints";
+.d-flex>div {
+    float: none;
+}
+
+.col-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+}
+
+.nombre {
+    display: block;
+    font-weight: 300;
+    color: white;
+}
+
+.btn {
+    @include media-breakpoint-down(md) {
+        color: white;
+        border-color: white;
+    }
+}

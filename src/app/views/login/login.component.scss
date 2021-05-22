@@ -1,0 +1,241 @@
+@import '../../../scss/bootstrap-variables';
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import '../../../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+
+.input-group-addon,
+.input-group-btn {
+    min-width: 40px;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+h1.login-text {
+    font-weight: 200;
+    &__bold {
+        font-weight: 400;
+    }
+}
+
+.login-form {
+    margin-top: 4rem;
+    img.isologo {
+        margin-bottom: 4rem;
+        @include media-breakpoint-down(md) {
+            margin-bottom: 2rem;
+        }
+    }
+    h2.iniciar-sesion {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 1.4rem;
+        color: white;
+        margin-bottom: 5rem;
+        @include media-breakpoint-down(md) {
+            margin-bottom: 2rem;
+        }
+    }
+}
+
+.btn-login {
+    background-color: white;
+    color: #D80E70;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    &:hover {
+        background-color: rgb(194, 179, 218);
+    }
+}
+
+a {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .9rem;
+    &:hover {
+        color: white;
+    }
+}
+
+.checkCointainer {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .9rem;
+    height: 20px;
+}
+
+.rememberInfoLogin{
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .9rem;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.sidenav {
+    position: fixed;
+    height: 100%;
+    z-index: 1;
+    overflow-x: hidden;
+    background-image: url('../../../assets/img/background2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    @include media-breakpoint-down(sm) {
+        width: 100%;
+        position: relative;
+    }
+    @include media-breakpoint-only(md) {
+        width: 50%;
+    }
+    @include media-breakpoint-up(lg) {
+        width: 60%;
+    }
+    &__info {
+        font-family: 'Montserrat', sans-serif;
+        position: relative;
+        margin-left: 2rem;
+        bottom: -50%;
+        color: white;
+        @include media-breakpoint-down(sm) {
+            bottom: -10px;
+        }
+    }
+}
+
+.login-main {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: rgba(157, 23, 77, 1);
+    background: -moz-linear-gradient(225deg, rgba(157, 23, 77, 1) 0%, rgba(244, 114, 182, 1) 100%);
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(244, 114, 182, 1)), color-stop(100%, rgba(140, 68, 255, 1)));
+    background: -webkit-linear-gradient(225deg, rgba(157, 23, 77, 1) 0%, rgba(244, 114, 182, 1) 100%);
+    background: -o-linear-gradient(225deg, rgba(157, 23, 77, 1) 0%, rgba(244, 114, 182, 1) 100%);
+    background: -ms-linear-gradient(225deg, rgba(157, 23, 77, 1) 0%, rgba(244, 114, 182, 1) 100%);
+    background: linear-gradient(225deg, rgba(157, 23, 77, 1) 0%, rgba(244, 114, 182, 1) 100%);
+    &-flow {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+    }
+    @include media-breakpoint-down(md) {
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    @include media-breakpoint-only(md) {
+        margin-left: 50%;
+        width: 50%;
+    }
+    @include media-breakpoint-up(lg) {
+        position: fixed;
+        height: 100%;
+        margin-left: 60%;
+        width: 40%;
+    }
+}
+
+::placeholder {
+    color: white;
+}
+
+.input-text,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    width: 100%;
+    background-color: transparent!important;
+    border: 0;
+    border-bottom: solid 1px #aaa;
+    color: white!important;
+    padding-bottom: .4rem;
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
+    outline: none;
+    caret-color: white;
+}
+
+.inputContainer {
+    width: 100%;
+}
+
+.app-footer-login {
+    transition: margin-left .25s, margin-right .25s, width .25s, flex .25s;
+}
+
+input.ng-invalid{
+    border:0!important;
+    border-bottom: solid 1px #aaa!important;
+}
+
+.spinner {
+    margin: 10px 0 0 15px;
+    height: 40px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.spinner>div {
+    background-color: var(--pink);
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    margin-right: 3px;
+}
+
+.spinner .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+    0%,
+    40%,
+    100% {
+        -webkit-transform: scaleY(0.4)
+    }
+    20% {
+        -webkit-transform: scaleY(1.0)
+    }
+}
+
+@keyframes sk-stretchdelay {
+    0%,
+    40%,
+    100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+    }
+    20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+    }
+}

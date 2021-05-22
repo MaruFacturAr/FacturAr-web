@@ -1,0 +1,59 @@
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins/breakpoints";
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row.display-flex>[class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+h5.titulo {
+    font-size: 1.25rem;
+}
+
+$margin: 1%;
+.dashboard-columns>.dashboard-item {
+    display: inline-block;
+    margin-right: $margin;
+    @include media-breakpoint-down(sm) {
+        width: 100%;
+        margin-right: 0;
+    }
+    @include media-breakpoint-up(md) {
+        width: 50% - $margin;
+    }
+    @include media-breakpoint-only(xl) {
+        width: 33.33% - $margin;
+    }
+}
+
+a {
+    &:hover {
+        .incoterm {
+            opacity: 1;
+            background-position-y: bottom;
+        }
+        .containers {
+            opacity: 1;
+            background-position-y: bottom;
+        }
+    }
+}
+
+.icono {
+    height: 13px;
+    background-repeat: no-repeat;
+    background-position: left top;
+    display: inline-block;
+    opacity: .5;
+    margin-right: .5rem;
+    +span {
+        display: inline-block;
+        line-height: 1.35;
+        vertical-align: top;
+    }
+}

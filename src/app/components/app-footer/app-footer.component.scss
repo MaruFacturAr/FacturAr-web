@@ -1,0 +1,14 @@
+.app-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.footerLogo {
+    background: url('../../../assets/img/logo-footer.png');
+    background-repeat: no-repeat;
+    width: 162px;
+    height: 50px;
+    background-size: 70%;
+    background-position: center;
+    opacity: .3;
+}

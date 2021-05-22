@@ -1,0 +1,92 @@
+<div >
+    <ngx-aside #settings [position]="'right'" [title]="'Crear tu cuenta'"  [showOverlay]="false"  [submitButtonTitle]="'Send'" (cancel)="onClose()"
+    [showDefaultFooter]="false"  >
+    
+        <form [formGroup]="CMXFormGroup" (ngSubmit)="onSave()">
+        
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputName">Nombre</label>
+              <input type="text" class="form-control" id="inputName" formControlName="name" placeholder="Nombre">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputLastName">Apellido</label>
+              <input type="tex" class="form-control" id="inputLastName" formControlName="last_name" placeholder="Apellido">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputUserName">Nombre Usuario</label>
+              <input type="email" class="form-control" id="inputUserName" formControlName="username" placeholder="Nombre Usuario">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Contraseña</label>
+              <input type="password" class="form-control" id="inputPassword4" formControlName="password" placeholder="Contraseña">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail4">Email</label>
+            <input type="email" class="form-control" id="inputEmail4" formControlName="email" placeholder="Email">
+          </div>
+          <!-- <div class="form-group">
+                      <label for="inputPhone">Telefono</label>
+                      
+                    </div> -->
+          <h6 class="mb-3 pb-2 border-bottom border-secondary">Teléfono</h6>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputpais">Código país</label>
+              <input type="text" class="form-control" id="inputpais" formControlName="country_code" placeholder="+54">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputcodigo">Area</label>
+              <input type="phone" class="form-control" id="inputcodigo" formControlName="city_code" placeholder="444444">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputPhone">Número</label>
+              <input type="phone" class="form-control" id="inputPhone" formControlName="number" placeholder="444444">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPhone">Extension</label>
+              <input type="phone" class="form-control" id="inputZip" formControlName="extension" placeholder="55555">
+            </div>
+          </div>
+          <h6 class="mb-3 pb-2 border-bottom border-secondary">Dirección</h6>
+          <div class="form-group">
+            <label for="inputAddress2">Domicilio</label>
+            <input type="text" class="form-control" id="inputAddress2" formControlName="street" placeholder="Calle nro dpto piso">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputCity">Localidad</label>
+              <input type="text" class="form-control" id="inputCity" formControlName="city" >
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputState">Provincia</label>
+              <select id="inputState" class="form-control" formControlName="province" >
+                <option *ngFor="let r of provinces" [ngValue]="r.id">
+                  {{r.name}}
+              </option>                
+              </select>
+            </div>
+            <!-- <div class="form-group col-md-2">
+                        <label for="inputZip">Codigo Postal</label>
+                        <input type="text" class="form-control" id="inputZip">
+                      </div> -->
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck" (change)="onChange()">
+              <label class="form-check-label" for="gridCheck">
+                Acepta Terminos y condiciones
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!(CMXFormGroup.valid && isChecked)">Guardar</button>
+        
+        </form>
+    
+    </ngx-aside>
+    </div>

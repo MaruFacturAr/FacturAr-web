@@ -1,0 +1,75 @@
+<div class="card shadow-sm" *ngIf="usuario">
+    <h5 class="card-header formTitle">
+        <i class="fas fa-user mr-2"></i> {{usuario.name | titlecase}} {{usuario.last_name | titlecase}}
+    </h5>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-5">
+                <form (ngSubmit)="guardarCambios()" #form novalidate [formGroup]="CMXFormGroup">
+                    <div class="cmx-info">
+                        <label>Usuario</label>
+                        <span>{{usuario.userName | titlecase}}</span>
+                    </div>
+
+                    <!-- <div class="cmx-info">
+                        <label>Key</label>
+                        <span>{{usuario.keyDespachante}}</span>
+                    </div> -->
+
+                    <div class="cmx-info">
+                        <label>Email</label>
+                        <input type="email" id="email" class="form-control" formControlName="Email">
+                    </div>
+
+                    <div class="cmx-info">
+                        <label>Domicilio</label>
+                        <input type="text" id="domicilio" class="form-control" formControlName="Domicilio">
+                    </div>
+
+                    <div class="cmx-info">
+                        <label>Contraseña</label>
+                        <input type="password" id="password" class="form-control" formControlName="Password" pattern="[A-Za-z0-9]*">
+                        <small id="inputPassword" class="form-text text-muted">
+                            Debe tener un mínimo de 8 carácteres. No debe contener caracteres especiales ni emojis.
+                        </small>
+                    </div>
+
+                    <div class="cmx-info">
+                        <label>Repetir Contraseña</label>
+                        <input type="password" id="password2" class="form-control" formControlName="Password2" pattern="[A-Za-z0-9]*">
+                    </div>
+
+                    <button class="btn btn-primary" type="submit" [disabled]="!CMXFormGroup.valid || !(CMXFormGroup.touched || CMXFormGroup.dirty)">
+                        <i class="fas fa-save"></i> Guardar Cambios
+                    </button>
+
+                </form>
+            </div>
+            <div class="col-lg-7 mt-3 mt-lg-0">
+                <div class="bg bg-light p-3">
+                    <div class="row" *ngIf="!token">
+                        <div class="col">
+                            <button type="button" class="btn btn-primary btn-sm" (click)="getToken()">Mostrar TOKEN</button>
+                        </div>
+                    </div>
+
+                    <div class="cmx-info mb-0" *ngIf="token">
+                        <label>TOKEN</label>
+                        <code>{{token}}</code>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <button class="btn btn-primary btn-sm" (cbOnSuccess)="onTokenCopied($event)" ngxClipboard [cbContent]="token">
+                                    <i class="fas fa-copy mr-2"></i> Copiar TOKEN
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

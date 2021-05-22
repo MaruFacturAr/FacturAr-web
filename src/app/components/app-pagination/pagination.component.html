@@ -1,0 +1,13 @@
+<div *ngIf="itemsPerPage < totalRecords">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-outline btn-outline-primary" [ngClass]="{'isLoading': isPrevLoading}" (click)="doPrevPage()" [disabled]="currentPage == 1 || isPrevLoading">
+            <i class="fas fa-angle-left"></i>
+            <div class="loader"></div>
+        </button>
+        <button type="button" class="btn btn-outline btn-outline-primary" [ngClass]="{'isLoading': isNextLoading}" (click)="doNextPage()" [disabled]="(currentPage*itemsPerPage >= totalRecords) || isNextLoading">
+            <i class="fas fa-angle-right"></i>
+            <div class="loader"></div>
+        </button>
+    </div>
+    <label class="ml-2 text-muted" *ngIf="showPageText">{{fromTo}} {{totalRecords}} {{recordsText}}</label>
+</div>

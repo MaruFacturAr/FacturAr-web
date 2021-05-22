@@ -1,0 +1,33 @@
+<header class="app-header navbar">
+
+    <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a class="navbar-brand" href="#"></a>
+
+    <button class="navbar-toggler d-md-down-none mr-auto" type="button" appSidebarMinimizer appBrandMinimizer>
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <ul class="nav navbar-nav mr-2">
+        <li>
+            <div class="row d-flex align-items-center" *ngIf="currentUser">
+                <div class="col d-md-down-none">
+                    <span class="nombre">{{currentUser.name | titlecase}} {{currentUser.lastName | titlecase}}</span>
+                    <small class="nombre float-right">Usuario: {{currentUser.userName | titlecase}}</small>
+                </div>
+                <div class="col-auto">
+                    <a class="btn btn-outline-secondary rounded-circle" href="#" [routerLink]="['/perfil']" tooltip="Mi Perfil" placement="bottom" container="body">
+                        <i class="fas fa-user font-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </li>        
+        <li>
+            <a class="btn btn-outline-secondary rounded-circle ml-2" href="#" (click)="logout()" tooltip="Cerrar Sesión" placement="bottom" container="body">
+                <i class="fas fa-power-off font-xs"></i>
+            </a>
+        </li>
+    </ul>
+</header>
