@@ -1,13 +1,11 @@
 import { Deserializable } from "app/interfaces/deserializable.model";
 
-export class Phone implements Deserializable {
-   
-    id:number;
-    city_code: number;
-    country_code: string;
-    extension: string;
+export class Document implements Deserializable {
+
+    country_id: number;
+    document_type_id: number;
+    id: number;
     number: string;
-    phone_type_id: number;
 
     deserialize(input: any): this {
         Object.assign(this, input);

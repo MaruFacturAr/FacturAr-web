@@ -1,0 +1,114 @@
+<div class="card shadow-sm">
+    <div class="card-header formTitle">
+        <div class="row">
+            <div class="col-6">
+                <h5 class="mb-0">
+                    <i class="far fa-building"></i> Mi Negocio
+                    <!-- <fa-icon [icon]='faFileInvoice' class='mr-2'></fa-icon> {{ 'CMXEstadoCuenta.ComprobantePago' | translate }} -->
+                </h5>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="CMXFormGroup" (ngSubmit)="onSave()">
+        <div class="card-body">
+            <h1 class="display-6 mb-3 pb-2 border-bottom border-secondary">Datos Facturación</h1>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputLegalName">Razon Social</label>
+                  <input type="text" class="form-control" id="inputLegalName" formControlName="legal_name" placeholder="Razon social">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputFantasyName">Nombre Comercial</label>
+                  <input type="tex" class="form-control" id="inputFantasyName" formControlName="fantasy_name" placeholder="Nombre comercial">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputIIBB">Ingresos Brutos </label>
+                  <input type="text" class="form-control" id="inputIIBB" formControlName="iibb_code" placeholder="Razon social">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputInitialDate">Fecha de inicio de actividades</label>
+                  <input type="tex" class="form-control" id="inputInitialDate" formControlName="initial_date" bsDatepicker [bsConfig]="bsConfig" [maxDate]="maxDate">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputtaxpayer_type_id">Condición frente al IVA</label>
+                  <select id="inputtaxpayer_type_id" class="form-control" formControlName="taxpayer_type_id" >
+                    <option *ngFor="let t of taxpayerTypes" [ngValue]="t.id">
+                      {{t.name}}
+                  </option>                
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputCUIT">CUIT</label>
+                  <input type="txt" class="form-control" id="inputCUIT" formControlName="number" placeholder="CUI">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail4">Email</label>
+                <input type="email" class="form-control" id="inputEmail4" formControlName="email" placeholder="Email">
+              </div>
+              <!-- <div class="form-group">
+                          <label for="inputPhone">Telefono</label>
+                          
+                        </div> -->
+              <h1 class="display-6 mb-3 pb-2 border-bottom border-secondary">Teléfono</h1>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputpais">Código país</label>
+                  <input type="text" class="form-control" id="inputpais" formControlName="country_code" placeholder="+54">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputcodigo">Area</label>
+                  <input type="phone" class="form-control" id="inputcodigo" formControlName="city_code" placeholder="444444">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputPhone">Número</label>
+                  <input type="phone" class="form-control" id="inputPhone" formControlName="phone_number" placeholder="444444">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPhone">Extension</label>
+                  <input type="phone" class="form-control" id="inputZip" formControlName="extension" placeholder="55555">
+                </div>
+              </div>
+              <h1 class="display-6 mb-3 pb-2 border-bottom border-secondary">Domicilio Comercial</h1>
+              <div class="form-group">
+                <label for="inputAddress2">Domicilio</label>
+                <input type="text" class="form-control" id="inputAddress2" formControlName="street" placeholder="Calle nro dpto piso">
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputCity">Localidad</label>
+                  <input type="text" class="form-control" id="inputCity" formControlName="city" >
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputState">Provincia</label>
+                  <select id="inputState" class="form-control" formControlName="province" >
+                    <option *ngFor="let r of provinces" [ngValue]="r.id">
+                      {{r.name}}
+                  </option>                
+                  </select>
+                </div>
+                <!-- <div class="form-group col-md-2">
+                            <label for="inputZip">Codigo Postal</label>
+                            <input type="text" class="form-control" id="inputZip">
+                          </div> -->
+              </div>
+        </div>
+        
+        <div class="card-footer">
+            <div class="row">
+                <div class="col text-right">
+                    <!-- <label  class="col-sm-4 col-form-label">{{appFileUploadR.uploader?.queue.length}}</label> -->
+                    <button class="btn btn-primary" type="submit"  [disabled]="!CMXFormGroup.valid" >
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

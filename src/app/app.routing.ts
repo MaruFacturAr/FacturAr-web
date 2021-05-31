@@ -6,6 +6,7 @@ import { FullLayoutComponent } from './containers/full-layout/full-layout.compon
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { PerfilConsultaComponent } from './views/perfil/perfil-consulta/perfil-consulta.component';
 import { AyudaComponent } from './views/ayuda/ayuda.component';
+import { CompanyComponent } from './views/company/company.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,12 @@ export const routes: Routes = [
         path: 'ayuda',
         component: AyudaComponent,
         data: { title: 'Guía Rápida' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'negocio',
+        component: CompanyComponent,
+        data: { title: 'Mi Negocio' },
         canActivate: [AuthGuard]
       },
       

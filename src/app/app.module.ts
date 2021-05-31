@@ -66,6 +66,9 @@ import { CMXStorageService } from './_services/cmx.storage.service';
 import { UserRegisterComponent } from './views/login/user-register/user-register.component';
 import { NgxAsideModule } from './components/advanced/aside/aside.module';
 import { ProvinceService } from './_services/province.service';
+import { CompanyComponent } from './views/company/company.component';
+import { CompanyService } from './_services/company.service';
+import { TaxpayerTypeService } from './_services/taxpayer.type.service';
 
 
 
@@ -113,7 +116,9 @@ const PROVIDERS_SERVICES = [
   ExcelService,
   UsuarioService,
   LoaderService,
-  ProvinceService
+  ProvinceService,
+  CompanyService,
+  TaxpayerTypeService
 ]
 
 const DIRECTIVES = [
@@ -181,7 +186,8 @@ const DIRECTIVES = [
     ...DIRECTIVES,
     AppMenuComponent,
    // ServicioMoaNoDelegadoComponent,
-    UserRegisterComponent  
+    UserRegisterComponent,
+   CompanyComponent  
   ],
   entryComponents: [
     AmountComponent, 

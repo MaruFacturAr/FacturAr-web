@@ -93,6 +93,7 @@ export class UserRegisterComponent implements OnInit {
     user.address.id = 0;
     user.address.province_id = this.CMXFormGroup.get("province").value;
     user.phone = new Phone();
+    user.phone.id = 0;
     user.phone.phone_type_id = 1;
     user.phone.city_code = this.CMXFormGroup.get("city_code").value;
     user.phone.country_code = this.CMXFormGroup.get("country_code").value;

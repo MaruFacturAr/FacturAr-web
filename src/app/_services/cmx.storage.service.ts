@@ -90,8 +90,9 @@ export class CMXStorageService {
     this._sessionStorage.clear("CMX-CAJASESPECIALESCAJAS");
   }
 
-  
-
+  public removeCompanyStorage(){
+    this._sessionStorage.clear("FAC-COMPANY");
+  }
   
   
 }
