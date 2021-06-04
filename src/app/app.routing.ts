@@ -7,13 +7,14 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { PerfilConsultaComponent } from './views/perfil/perfil-consulta/perfil-consulta.component';
 import { AyudaComponent } from './views/ayuda/ayuda.component';
 import { CompanyComponent } from './views/company/company.component';
+import { ItemComponent } from './views/item/item.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: FullLayoutComponent,
     canActivate: [AuthGuard],
-    data: {  title: 'SRD Comex' },
+    data: {  title: 'FacturAr' },
     children: [
       {
         path:'',
@@ -29,7 +30,7 @@ export const routes: Routes = [
       {
         path: 'perfil',
         component: PerfilConsultaComponent,
-        data: { title: 'Perfil de Cliente' },
+        data: { title: 'Perfil del Usuario' },
         canActivate: [AuthGuard]
       },
       {
@@ -44,7 +45,12 @@ export const routes: Routes = [
         data: { title: 'Mi Negocio' },
         canActivate: [AuthGuard]
       },
-      
+      {
+        path: 'item',
+        data: { title: 'Producto o Servicio' },
+        loadChildren: () => import('./views/item/item.module').then(m => m.ItemModule),
+        canActivate: [AuthGuard]
+      },
     ]
   },
   { path: 'login', component: LoginComponent },

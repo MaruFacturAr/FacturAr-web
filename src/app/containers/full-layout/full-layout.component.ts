@@ -4,7 +4,7 @@ import { SnotifyService } from 'ng-snotify';
 import { DOCUMENT } from '@angular/common';
 import { AuthenticationService } from 'app/_services/authentication.service';
 import { SessionStorage } from 'ngx-webstorage';
-import { ModalDirective, BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap';
+import { ModalDirective, BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 //import { ServicioMoaNoDelegadoComponent } from 'app/components/NewsComponents/servicio-moa-no-delegado/servicio-moa-no-delegado.component';
 //import { ServiciosAFIPDelegadosService } from 'app/_services/serviciosAFIP.delegados.service';
 

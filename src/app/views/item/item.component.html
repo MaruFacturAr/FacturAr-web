@@ -1,0 +1,71 @@
+<div class="card shadow-sm">
+    <div class="card-header formTitle">
+        <div class="row">
+            <div class="col-6">
+                <h5 class="mb-0">
+                    <i class="far fa-building"></i> Alta de Producto o Servicio
+                    <!-- <fa-icon [icon]='faFileInvoice' class='mr-2'></fa-icon> {{ 'CMXEstadoCuenta.ComprobantePago' | translate }} -->
+                </h5>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="CMXFormGroup" (ngSubmit)="onSave()">
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputCode">Código</label>
+                  <input type="text" class="form-control" id="inputCode" formControlName="code" placeholder="Código">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputAlternative_code">Código Alternativo</label>
+                  <input type="tex" class="form-control" id="inputAlternative_code" formControlName="alernative_code" placeholder="Código Alternativo">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputItem_type_id">Tipo</label>
+                    <select id="inputItem_type_id" class="form-control" formControlName="item_type_id" >
+                      <option *ngFor="let t of item_types" [ngValue]="t.id">
+                        {{t.name}}
+                    </option>                
+                    </select>
+                  </div>
+                <div class="form-group col-md-6">
+                  <label for="inputName">Nombre</label>
+                  <input type="tex" class="form-control" id="inputName" formControlName="name" placeholder="Nombre">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputDescription">Descripcion</label>
+                  <input type="text" class="form-control" id="inputDescription" formControlName="description" placeholder="Descripcion">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCurrency">Moneda</label>
+                    <select id="inputCurrency" class="form-control" formControlName="currency_id" >
+                      <option *ngFor="let t of currency" [ngValue]="t.id">
+                        {{t.name}}
+                    </option>                
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPrice">Precio</label>
+                  <input type="text" class="form-control" id="inputPrice" formControlName="price" placeholder="Precio">
+                </div>
+              </div>
+        </div>
+        
+        <div class="card-footer">
+            <div class="row">
+                <div class="col text-right">
+                    <!-- <label  class="col-sm-4 col-form-label">{{appFileUploadR.uploader?.queue.length}}</label> -->
+                    <button class="btn btn-primary" type="submit"  [disabled]="!CMXFormGroup.valid" >
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

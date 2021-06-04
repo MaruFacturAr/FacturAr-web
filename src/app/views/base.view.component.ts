@@ -1,9 +1,10 @@
 import { SnotifyService } from 'ng-snotify'
 import { ExcelService } from '../_services/excel.service';
-import { BsDatepickerConfig, BsModalRef } from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import {  BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { LocalDataSource } from 'ng2-smart-table';
+import { LocalDataSource } from 'ng2-smart-table'
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'app/_services/authentication.service';
 import { CMXConfig } from 'config/config';
@@ -100,10 +101,10 @@ export abstract class BaseViewComponent {
 
         //ngx-Calendar
         this.bsConfig = Object.assign({}, {
-            containerClass: 'theme-dark-blue',
+            containerClass: 'theme-default',
             showWeekNumbers: false,
-            dateInputFormat: 'DD/MM/YYYY',
-            rangeInputFormat: 'DD/MM/YYYY',
+            dateInputFormat: 'YYYY-MM-DD',
+            rangeInputFormat: 'YYYY-MM-DD',
             locale:'es-ar',
             rangeSeparator: ' al '
         });

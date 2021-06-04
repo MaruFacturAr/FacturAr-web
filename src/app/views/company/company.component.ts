@@ -18,7 +18,7 @@ import { BillingData } from 'app/_models/billing.data.model';
 import { Address } from 'app/_models/address.model';
 import { Phone } from 'app/_models/phone.model';
 import { Document } from 'app/_models/document.model';
-import { formatDate } from '@angular/common';
+import { format, set, sub } from 'date-fns';
 
 @Component({
   selector: 'app-company',
@@ -33,7 +33,7 @@ export class CompanyComponent extends BaseViewComponent implements OnInit {
   CMXFormGroup = new FormGroup({
 
     iibb_code: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]),
-    initial_date: new FormControl(new Date(), Validators.required),
+    initial_date: new FormControl('', Validators.required),
     fantasy_name: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
     legal_name: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
     taxpayer_type_id: new FormControl('', Validators.required),
@@ -105,7 +105,7 @@ export class CompanyComponent extends BaseViewComponent implements OnInit {
     if (this.company) {
       this.CMXFormGroup.patchValue({
         iibb_code: this.company.iibb_code,
-        initial_date: formatDate(this.company.initial_date,'dd/MM/yyyy', 'es_AR' ),
+        initial_date: format(set(new Date(this.company.initial_date), { hours:0, minutes:0, seconds: 0}), "yyyy-MM-dd'T'HH:mm:ss"),
         fantasy_name: this.company.billingData.fantasy_name,
         legal_name: this.company.billingData.legal_name,
         number: this.company.billingData.document.number,
@@ -127,8 +127,9 @@ export class CompanyComponent extends BaseViewComponent implements OnInit {
     {
       this.initialCompany();
     }
+    debugger;
     this.company.iibb_code = this.CMXFormGroup.get("iibb_code").value;
-    this.company.initial_date = new Date(formatDate(this.CMXFormGroup.get("initial_date").value, 'yyyy-MM-dd', 'es_AR'));
+    this.company.initial_date = this.CMXFormGroup.get("initial_date").value;
     this.company.billingData.fantasy_name = this.CMXFormGroup.get("fantasy_name").value;
     this.company.billingData.legal_name = this.CMXFormGroup.get("legal_name").value;
     this.company.billingData.document.number = this.CMXFormGroup.get("number").value;

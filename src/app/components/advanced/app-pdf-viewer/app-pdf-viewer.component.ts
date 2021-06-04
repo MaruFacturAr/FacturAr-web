@@ -1,8 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { WindowRefService } from '../../../_services/windowRef.service';
 import { CMXAnimations } from 'app/_helpers/animations';
-import { BsModalRef } from 'ngx-bootstrap';
-import { PDFDocumentProxy } from 'ng2-pdf-viewer';
+
 
 @Component({
   selector: 'app-pdf-viewer',

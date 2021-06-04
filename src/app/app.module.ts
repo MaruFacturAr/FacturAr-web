@@ -15,7 +15,6 @@ import { LoginComponent } from './views/login/login.component';
 import { NavigationService } from './_services/navigation.service';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { AppRoutingModule } from './app.routing';
-import { BsDatepickerModule, TooltipModule, BsDropdownModule, defineLocale, esLocale, ModalModule, ProgressbarModule, AccordionModule, TabsModule } from 'ngx-bootstrap';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { RoutingState } from './_services/routing.service';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -42,7 +41,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { MomentModule } from 'ngx-moment';
 import { ExcelService } from './_services/excel.service';
 import { NgDragDropModule } from 'ng-drag-drop';
-import { AppPdfViewerModule } from './components/advanced/app-pdf-viewer/app-pdf-viewer.module';
+//import { AppPdfViewerModule } from './components/advanced/app-pdf-viewer/app-pdf-viewer.module';
 import { AppModalModule } from './components/app-modal/app-modal.module';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { PaisAfipService } from './_services/pais.afip.service';
@@ -54,7 +53,6 @@ import { AyudaComponent } from './views/ayuda/ayuda.component';
 import { ExistUserValidatorDirective } from './directives/usuario/exist-user-directive';
 import { HasRoleDirective } from './directives/access/has-role-directive';
 import { NumericDirective } from './directives/numeric/numeric.directive';
-import { PopoverModule } from 'ngx-bootstrap';
 import { AppHelpComponent } from './components/app-help/app-help.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { ClipboardModule } from 'ngx-clipboard';
@@ -69,6 +67,15 @@ import { ProvinceService } from './_services/province.service';
 import { CompanyComponent } from './views/company/company.component';
 import { CompanyService } from './_services/company.service';
 import { TaxpayerTypeService } from './_services/taxpayer.type.service';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { defineLocale, esLocale } from 'ngx-bootstrap/chronos';
+import {AccordionModule} from 'ngx-bootstrap/accordion';
+import {TabsModule} from 'ngx-bootstrap/tabs';
+import {PopoverModule} from 'ngx-bootstrap/popover';
 
 
 
@@ -134,7 +141,6 @@ const DIRECTIVES = [
     BrowserAnimationsModule,
     HttpClientModule,
     AppModalModule,
-    AppPdfViewerModule,
     AppRoutingModule,
     AppAppliedFiltersModule,
     AppPaginationModule,
@@ -187,7 +193,8 @@ const DIRECTIVES = [
     AppMenuComponent,
    // ServicioMoaNoDelegadoComponent,
     UserRegisterComponent,
-   CompanyComponent  
+   CompanyComponent
+    
   ],
   entryComponents: [
     AmountComponent, 

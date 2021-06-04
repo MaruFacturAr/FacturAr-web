@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ServiciosAFIPDelegadosService } from 'app/_services/serviciosAFIP.delegados.service';
 
 @Component({

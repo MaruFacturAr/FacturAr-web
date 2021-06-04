@@ -14,7 +14,7 @@
     "target": "es2015",
     "types": ["jquery"],
     "typeRoots": [
-      "node_modules/@types"
+      "./node_modules/@types"
     ],
     "lib": [
       "es2016",
@@ -25,5 +25,8 @@
       "core-js/es7/reflect": ["node_modules/core-js/proposals/reflect-metadata"],
       "core-js/es6/*": ["node_modules/core-js/es/*"]
     }
-  }
+  },
+  "angularCompilerOptions": {
+    "enableIvy": true
+  },
 }

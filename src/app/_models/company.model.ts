@@ -6,7 +6,7 @@ export class Company implements Deserializable{
     billingData: BillingData;
     id: number;
     iibb_code: string;
-    initial_date: Date;
+    initial_date: string;
     userId: number;
 
     deserialize(input: any): this {

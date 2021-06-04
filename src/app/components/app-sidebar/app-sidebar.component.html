@@ -8,10 +8,24 @@
                     <i class="fas fa-file-invoice"></i> Datos Facturación
                 </a>
             </li>
-            <li class="nav-item" *appHasRole='["A","800"]'>
+            <!-- <li class="nav-item" *appHasRole='["A","800"]'>
                 <a class="nav-link" routerLinkActive="active" [routerLink]="['/declaraciones']">
                     <i class="fas fa-user"></i> Clientes
                 </a>
+            </li> -->
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0)" *appHasRole='["A"]'>
+                    <i class="fas fa-barcode"></i> Productos o Servicios</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item" *appHasRole='["A"]'>
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/item/nuevo']">
+                            <i class="fas fa-barcode"> Nueva</a>
+                    </li>
+                    <li class="nav-item" *appHasRole='["A"]'>
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/item']">
+                            <i class="fas fa-barcode"></i> Consultar</a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item" *appHasRole='["A","800"]'>
                 <a class="nav-link" routerLinkActive="active" [routerLink]="['/declaraciones']">

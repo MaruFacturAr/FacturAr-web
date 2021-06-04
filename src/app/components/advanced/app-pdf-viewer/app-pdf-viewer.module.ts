@@ -6,7 +6,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { WindowRefService } from '../../../_services/windowRef.service';
 import { FormsModule } from '@angular/forms';
 import { AppPaginationModule } from 'app/components/app-pagination/pagination.module';
-import { TooltipModule } from 'ngx-bootstrap';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from 'app/_helpers/jwt.interceptor';
 
