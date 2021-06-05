@@ -8,10 +8,10 @@ import { CMXAnimations } from 'app/_helpers/animations';
 import { AuthenticationService } from 'app/_services/authentication.service';
 import { ExcelService } from 'app/_services/excel.service';
 import { ItemService } from 'app/_services/item.service';
-import { SnotifyService } from 'ng-snotify';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Observable } from 'rxjs';
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: 'app-item-consulta',
@@ -22,19 +22,20 @@ import { Observable } from 'rxjs';
 export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
  items:any;
  filtros:any;
+
   CMXFormGroup = new FormGroup({
 
     code: new FormControl('',  Validators.maxLength(20)),
     name: new FormControl('',  Validators.maxLength(100)),
     
   });
-  @ViewChild("smartTable", {static: false}) smartTable: ElementRef;
+  @ViewChild("smartTable") smartTable: ElementRef;
 
   constructor(private _itemService: ItemService,
     private _modalService: BsModalService,
     _router: Router,
     _excelService: ExcelService,
-    _notificationService: SnotifyService,
+     _notificationService: NotifierService,
     _authenticationService: AuthenticationService,
     _translateService: TranslateService,
     _sessionStorageService: SessionStorageService,
@@ -101,12 +102,12 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
             this.setPaginationPosition();
 
         } else {
-            this._notificationService.warning('warning','No hay datos disponibles para su búsqueda');
+            this._notificationService.notify('warning','No hay datos disponibles para su búsqueda');
             this.resetForm();
         }
     },
     error => {
-        this._notificationService.error('error',error);
+        this._notificationService.notify('error',error);
     });
     return false;
 }

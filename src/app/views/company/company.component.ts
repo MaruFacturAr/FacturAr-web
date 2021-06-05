@@ -13,12 +13,12 @@ import { TaxpayerTypeService } from 'app/_services/taxpayer.type.service';
 import { BsModalService } from "ngx-bootstrap/modal";
 import { SessionStorageService } from 'ngx-webstorage';
 import { BaseViewComponent } from '../base.view.component';
-import { SnotifyService } from 'ng-snotify';
 import { BillingData } from 'app/_models/billing.data.model';
 import { Address } from 'app/_models/address.model';
 import { Phone } from 'app/_models/phone.model';
 import { Document } from 'app/_models/document.model';
 import { format, set, sub } from 'date-fns';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-company',
@@ -54,7 +54,7 @@ export class CompanyComponent extends BaseViewComponent implements OnInit {
     private _modalService: BsModalService,
     _router: Router,
     _excelService: ExcelService,
-    _notificationService: SnotifyService,
+    _notificationService: NotifierService,
     _authenticationService: AuthenticationService,
     _translateService: TranslateService,
     _sessionStorageService: SessionStorageService,
@@ -136,6 +136,7 @@ export class CompanyComponent extends BaseViewComponent implements OnInit {
     this.company.billingData.taxpayer_type_id = this.CMXFormGroup.get("taxpayer_type_id").value;
     this.company.billingData.email = this.CMXFormGroup.get("email").value;
     this.company.billingData.address.country_id=61;
+    this.company.billingData.address.address_type_id =2;
     this.company.billingData.address.city = this.CMXFormGroup.get("city").value;
     this.company.billingData.address.street = this.CMXFormGroup.get("street").value;
     this.company.billingData.address.province_id = this.CMXFormGroup.get("province").value;
@@ -168,9 +169,9 @@ export class CompanyComponent extends BaseViewComponent implements OnInit {
     this._companyService.register(this.company).subscribe((result:Company)=>{
       this.company = result;
       sessionStorage.setItem("FAC-COMPANY", JSON.stringify(result));
-      this._notificationService.success('Exito!', "Se grabó correctamente")
+      this._notificationService.notify('success', 'Se grabó correctamente');
 
-    }, error=>{this._notificationService.error(error)});
+    }, error=>{this._notificationService.notify('error', error);});
 
   }
 

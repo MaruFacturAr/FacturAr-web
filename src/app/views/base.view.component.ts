@@ -1,4 +1,3 @@
-import { SnotifyService } from 'ng-snotify'
 import { ExcelService } from '../_services/excel.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import {  BsModalRef } from 'ngx-bootstrap/modal';
@@ -11,6 +10,7 @@ import { CMXConfig } from 'config/config';
 import { Router } from '@angular/router';
 import * as Enumerable from "linq-es2015";
 import { SessionStorageService } from 'ngx-webstorage';
+import { NotifierService } from 'angular-notifier';
 
 
 export abstract class BaseViewComponent {
@@ -51,7 +51,7 @@ export abstract class BaseViewComponent {
 
     public bsModalRef: BsModalRef;
     
-    constructor(protected _notificationService: SnotifyService, 
+    constructor(protected _notificationService: NotifierService, 
                 protected _excelService: ExcelService,
                 protected _authenticationService: AuthenticationService,
                 protected _translateService:TranslateService,
@@ -214,7 +214,7 @@ export abstract class BaseViewComponent {
     protected exportToExcel(event) {
         
         this.exportToExcelDisabled = true;
-        this._notificationService.simple("Puede continuar trabajando mientras se procesa su reporte.","Procesando Excel",{ iconClass:"iconExcel", timeout:5000 });
+        this._notificationService.notify('default', 'Puede continuar trabajando mientras se procesa su reporte.');
         
         this.observableForExcelReport().subscribe((result: any) => {
               
@@ -308,7 +308,7 @@ export abstract class BaseViewComponent {
     }
 
     protected excelReportError(error: any) {
-        this._notificationService.error('Ocurrió un error al obtener el reporte');
+        this._notificationService.notify('error', 'Ocurrió un error al obtener el reporte');
     }
 
     protected collapseSidebar(){        

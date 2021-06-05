@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WindowRefService } from 'app/_services/windowRef.service';
 import { AuthenticationService } from 'app/_services/authentication.service';
-import { SnotifyService } from 'ng-snotify';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
 import { CMXConfig } from 'config/config';
+import { NotifierService } from 'angular-notifier';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class AppHeaderComponent implements OnInit {
   constructor(private router:Router,
               private windowRefService: WindowRefService,
               private _authenticationService:AuthenticationService,
-              private _notificationService:SnotifyService,
+              private _notificationService:NotifierService,
               private _localStorage:LocalStorageService,
               private _sessionStorage:SessionStorageService,
               private _translateService:TranslateService){ 
@@ -33,7 +33,7 @@ export class AppHeaderComponent implements OnInit {
     this._authenticationService.getCurrentUserInfo().subscribe((user) => {
         this.currentUser = user;
     }, error => {
-        this._notificationService.error(this._translateService.instant("CMXError.Error_003"));
+        this._notificationService.notify('error', this._translateService.instant("CMXError.Error_003"));
         this.logout();
     });
     

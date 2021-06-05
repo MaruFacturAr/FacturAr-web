@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { AuthenticationService } from '../../_services/authentication.service';
-import { SnotifyService } from 'ng-snotify';
 import { TranslateService } from '@ngx-translate/core';
 import { usuario } from 'app/_models/usuario';
 import { ConfirmPasswordValidator } from 'app/validators/confirm.password.validator';
 import { WindowRefService } from 'app/_services/windowRef.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({ templateUrl: 'login.component.html', styleUrls: ['login.component.scss'] })
 export class LoginComponent implements OnInit {
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private _notificationService: SnotifyService,
+    private _notificationService: NotifierService,
     private _translateService: TranslateService,
     private formBuilder: FormBuilder,
     private windowRefService: WindowRefService) {
@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit {
       }
 
     }, error => {
-      this._notificationService.error(this._translateService.instant("CMXError.Error_002", error));
+      this._notificationService.notify('error',this._translateService.instant("CMXError.Error_002", error));
       this.loading = false;
     }
     );

@@ -13,7 +13,7 @@ import { AuthenticationService } from './_services/authentication.service';
 import { LoaderService } from './_services/loader.service';
 import { LoginComponent } from './views/login/login.component';
 import { NavigationService } from './_services/navigation.service';
-import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+//import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { AppRoutingModule } from './app.routing';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { RoutingState } from './_services/routing.service';
@@ -76,6 +76,7 @@ import { defineLocale, esLocale } from 'ngx-bootstrap/chronos';
 import {AccordionModule} from 'ngx-bootstrap/accordion';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {PopoverModule} from 'ngx-bootstrap/popover';
+import { NotifierModule } from 'angular-notifier';
 
 
 
@@ -137,7 +138,6 @@ const DIRECTIVES = [
 @NgModule({
   imports: [
     BrowserModule,
-    SnotifyModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppModalModule,
@@ -148,6 +148,9 @@ const DIRECTIVES = [
     FormsModule,
     ReactiveFormsModule,
     MomentModule,
+    NotifierModule.withConfig({
+      behaviour: { autoHide: 7000, onClick:'hide' }
+    }),
     NgxWebstorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -205,12 +208,10 @@ const DIRECTIVES = [
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: APP_INITIALIZER, useFactory: moduleInitializer, deps: [TranslateService, Injector], multi: true },
     AuthGuard,    
     NavigationService,
-    SnotifyService,
     RoutingState,
     CMXStorageService,
     ...PROVIDERS_SERVICES

@@ -1,10 +1,10 @@
 import { Component, OnInit, Renderer2, Inject, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { SnotifyService } from 'ng-snotify';
 import { DOCUMENT } from '@angular/common';
 import { AuthenticationService } from 'app/_services/authentication.service';
 import { SessionStorage } from 'ngx-webstorage';
 import { ModalDirective, BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { NotifierService } from 'angular-notifier';
 //import { ServicioMoaNoDelegadoComponent } from 'app/components/NewsComponents/servicio-moa-no-delegado/servicio-moa-no-delegado.component';
 //import { ServiciosAFIPDelegadosService } from 'app/_services/serviciosAFIP.delegados.service';
 
@@ -22,7 +22,7 @@ export class FullLayoutComponent implements OnInit {
   bsModalRef: BsModalRef;
 
   constructor(private router:Router, 
-              private _notificationService:SnotifyService,
+              private _notificationService:NotifierService,
               private _authenticationService: AuthenticationService,
               private _renderer: Renderer2,
               private modalService: BsModalService,

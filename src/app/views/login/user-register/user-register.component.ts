@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotifierService } from 'angular-notifier';
 import {  NgxAsideComponent} from 'app/components/advanced/aside/aside.component'
 import { Address } from 'app/_models/address.model';
 import { Phone } from 'app/_models/phone.model';
@@ -7,7 +8,6 @@ import { ProvinceModel } from 'app/_models/province.model';
 import { User } from 'app/_models/user.model';
 import { ProvinceService } from 'app/_services/province.service';
 import { UsuarioService } from 'app/_services/usuario.service';
-import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-user-register',
@@ -44,7 +44,7 @@ export class UserRegisterComponent implements OnInit {
 
   });
    constructor(private _provinceService:ProvinceService, 
-    private _notificationService:SnotifyService,
+    private _notificationService:NotifierService,
     private _usuarioService:UsuarioService ) {
       if(this.provinces.length == 0)
       this._provinceService.getAll().subscribe((result) =>{
@@ -106,11 +106,11 @@ export class UserRegisterComponent implements OnInit {
     let newUser = this.createUser();
     this._usuarioService.register(newUser).subscribe((result) =>
     { 
-      this._notificationService.success('Bienvenido', 'Felicitaciones! ya estas registrado');
+      this._notificationService.notify('default', 'Felicitaciones! ya estas registrado');
       this.onClose();
     }, error => { 
       
-      this._notificationService.error('error', 'Hubo un error');
+      this._notificationService.notify('error', 'Hubo un error');
     });
     
   }

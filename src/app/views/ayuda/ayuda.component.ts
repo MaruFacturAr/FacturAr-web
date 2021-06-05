@@ -7,7 +7,7 @@ import { Component, ViewChild, ElementRef} from '@angular/core';
 
 export class AyudaComponent {
 
-@ViewChild('video' , {static: false}) video: ElementRef;
+@ViewChild('video') video: ElementRef;
 
 playVideo() {
 

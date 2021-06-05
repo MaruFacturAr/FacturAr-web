@@ -9,8 +9,18 @@
             </div>
         </div>
     </div>
+    
     <form [formGroup]="CMXFormGroup" (ngSubmit)="onSave()">
         <div class="card-body">
+          <div class="row" *ngIf="company == null" >
+            <div class="col">
+                <div class="alert alert-danger">
+                    <span class="alert-heading">
+                      <i class="fas fa-exclamation-triangle"></i> IMPORTANTE: Debe completar la info Negocio antes de crear los productos o Servicios.
+                    </span>
+                </div>
+            </div>
+        </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputCode">Código</label>
@@ -18,7 +28,7 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputAlternative_code">Código Alternativo</label>
-                  <input type="tex" class="form-control" id="inputAlternative_code" formControlName="alernative_code" placeholder="Código Alternativo">
+                  <input type="tex" class="form-control" id="inputAlternative_code" formControlName="alternative_code" placeholder="Código Alternativo">
                 </div>
               </div>
               <div class="form-row">
@@ -52,7 +62,7 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputPrice">Precio</label>
-                  <input type="text" class="form-control" id="inputPrice" formControlName="price" placeholder="Precio">
+                  <input type="number" class="form-control" id="inputPrice" formControlName="price" placeholder="Precio">
                 </div>
               </div>
         </div>
@@ -61,7 +71,7 @@
             <div class="row">
                 <div class="col text-right">
                     <!-- <label  class="col-sm-4 col-form-label">{{appFileUploadR.uploader?.queue.length}}</label> -->
-                    <button class="btn btn-primary" type="submit"  [disabled]="!CMXFormGroup.valid" >
+                    <button class="btn btn-primary" type="submit"  [disabled]="!CMXFormGroup.valid || company == null" >
                         Guardar
                     </button>
                 </div>

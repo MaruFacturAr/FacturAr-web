@@ -1,6 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
 import { ExcelService } from 'app/_services/excel.service';
-import { SnotifyService } from 'ng-snotify';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'app/_services/authentication.service';
 import { CMXAnimations } from 'app/_helpers/animations';
@@ -10,6 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ConfirmPasswordValidator } from 'app/validators/confirm.password.validator';
 import { User } from 'app/_models/user.model';
 import { Address } from 'app/_models/address.model';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
     templateUrl: 'perfil-consulta.component.html',
@@ -24,7 +24,7 @@ export class PerfilConsultaComponent  {
     token:string;
         
     constructor(_excelService: ExcelService,
-                private _notificationService: SnotifyService,
+                private _notificationService: NotifierService,
                 private _authenticationService: AuthenticationService,
                 _translateService: TranslateService,
                 private usuarioService: UsuarioService)
@@ -48,10 +48,10 @@ export class PerfilConsultaComponent  {
             this.usuario.address.street = result.address.street;
             this.usuario = this.usuario;
 
-            this._notificationService.success("Los datos fueron actualizados correctamente.");
+            this._notificationService.notify('success','Los datos fueron actualizados correctamente.');
 
         }, error => {
-            this._notificationService.success("Ocurrió un error al intentar actualizar los datos.");
+            this._notificationService.notify('success', "Ocurrió un error al intentar actualizar los datos.");
         });   
     }
 
@@ -60,6 +60,6 @@ export class PerfilConsultaComponent  {
     }
 
     onTokenCopied(event){
-        this._notificationService.success("El TOKEN fue copiado a su portapapeles.")
+        this._notificationService.notify('success',"El TOKEN fue copiado a su portapapeles.")
     }
 }
