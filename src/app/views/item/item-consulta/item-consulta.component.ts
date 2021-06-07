@@ -12,6 +12,9 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Observable } from 'rxjs';
 import { NotifierService } from "angular-notifier";
+import { ActionsTableComponent } from 'app/components/action-table/action.table.component';
+import { AppModalComponent } from 'app/components/app-modal/app-modal.component';
+import { FlagTableComponent } from 'app/components/flag-table/flag-table.component';
 
 @Component({
   selector: 'app-item-consulta',
@@ -77,7 +80,7 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
   doFormSearch() {
     this._itemService.getAllByCodeOrName(this.CMXFormGroup.value).subscribe((result:any) => {
 
-  this.createFormFiltersTags(this.CMXFormGroup.value);
+  this.createFormFiltersTags(this.CMXFormGroup);
 
         if (result && result.length > 0) {
 
@@ -181,8 +184,43 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
       name: 'Nombre',
       description: 'Descripcion',
       price: 'Precio'
+
   };
    return dataColumns;
+  }
+  activar(row: any) {
+    throw new Error('Method not implemented.');
+  }
+  desactivar(row: any) {
+    throw new Error('Method not implemented.');
+  }
+  delete(data: any) {
+    let sinFactura:boolean = true
+    if (sinFactura){
+      const modal = this._modalService.show(AppModalComponent);
+      
+      (<AppModalComponent>modal.content).confirmLabel = 'SI';
+      (<AppModalComponent>modal.content).cancelLabel = 'NO';
+      (<AppModalComponent>modal.content).showConfirmationModal(
+          'Atencion!',this._translateService.instant('CMXGuias.RemoveQuestion', {id: data.id}));
+
+      (<AppModalComponent>modal.content).onClose.subscribe(result => {
+        if (result === true) {
+          this._itemService.delete(data.id).subscribe(
+            (val) => { 
+            this._notificationService.notify('success', this._translateService.instant('CMXGuias.RemoveSuccess', {id: data.id}));           
+              
+            this.showResult = false;
+            
+            this.source.remove(data);
+          },
+          error => {
+            this._notificationService.notify('error', this._translateService.instant('CMXError.Error100'));
+          });
+          
+        }
+    });
+  }
   }
   protected getExcelReportName() {
     return 'Items';
@@ -196,6 +234,34 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
   }
   protected getDataColumns() {
     let dataColumns:any = {
+      actions: {
+        type: 'custom',
+        renderComponent: ActionsTableComponent,
+        editable: false,
+        filter:false,
+        width:'50px',
+        onComponentInitFunction: (instance) => {
+
+          instance.eliminar.subscribe((row) => {                
+            this.delete(row);
+          });
+
+          instance.modificar.subscribe((row) => {                
+            
+            
+
+            this._router.navigate(['items/nuevo']);
+          });
+          
+          instance.activar.subscribe((row) => {                
+            this.activar(row);
+          });
+
+          instance.desactivar.subscribe((row) => {                
+            this.desactivar(row);
+          });
+        }  
+      },  
       id: { title: 'id'},
       code: { title: 'Código'},
       alternative_code: { title: 'Código Alternativo'},
@@ -203,6 +269,19 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
       price: { title: 'Precio',  type: 'custom',
       renderComponent: AmountComponent,
       width: '80px'},
+      status_id : {  
+        title: 'Estado', 
+        type: 'custom',
+        renderComponent: FlagTableComponent,
+        valuePrepareFunction: (cell, row) =>  { 
+          return { 
+            status_id: cell
+          } 
+        },
+        editable: false,
+        filter:false,
+        class: 'd-none d-md-table-cell'
+      }
 
   }
   return dataColumns;

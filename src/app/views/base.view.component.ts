@@ -322,6 +322,7 @@ export abstract class BaseViewComponent {
         setTimeout(() => {
             
             this.filterItems = [];
+            debugger;
             let values = form.value;
     
             Object.keys(values).forEach(key => {

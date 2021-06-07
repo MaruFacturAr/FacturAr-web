@@ -81,6 +81,7 @@ export class ItemComponent extends BaseViewComponent implements OnInit {
     item.currency_id = this.CMXFormGroup.get("currency_id").value;
     item.created_date = moment(new Date()).toDate();
     item.modified_date = moment(new Date()).toDate();
+    item.userId = this.currentUser.id;
     return item;
   }
 

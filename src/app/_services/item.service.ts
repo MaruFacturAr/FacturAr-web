@@ -15,18 +15,29 @@ export class ItemService{
       getAllByCodeOrName(params: any) {
         let obj = Object.assign({}, params);
         Object.keys(obj).forEach(key => {
-          if (typeof obj[key] == "string") {
+          if (typeof obj[key] == "string" && obj[key] != null) {
             obj[key] = obj[key].trim();
           }
         });
-      
+  
+        let queryParams = Object.keys(obj) 
+        .filter(key => !(obj[key] == null || obj[key] == ''))
+        .reduce((acc, key) => Object.assign(acc, { [key]: obj[key] }), {});
     
-        let url = CMXConfig.environment.apiURL + '/items/find?';
-        return this.http.get(url, { params: obj });
+        let url = CMXConfig.environment.apiURL + '/items/find';
+        return this.http.get(url, { params: queryParams });
       }
 
       register(item: Item) {
         let obj = Object.assign({}, item);
         return this.http.post(CMXConfig.environment.apiURL + `/items/create`, obj);
+    }
+
+    delete(id){
+      let itemURL = CMXConfig.environment.apiURL  + '/items/' + id;
+  
+      itemURL.replace('\?\&', '?');
+    
+      return this.http.delete(itemURL);
     }
 }

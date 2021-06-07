@@ -5,6 +5,8 @@ import { AuthenticationService } from 'app/_services/authentication.service';
 import { SessionStorage } from 'ngx-webstorage';
 import { ModalDirective, BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { NotifierService } from 'angular-notifier';
+import { Company } from 'app/_models/company.model';
+import { CompanyService } from 'app/_services/company.service';
 //import { ServicioMoaNoDelegadoComponent } from 'app/components/NewsComponents/servicio-moa-no-delegado/servicio-moa-no-delegado.component';
 //import { ServiciosAFIPDelegadosService } from 'app/_services/serviciosAFIP.delegados.service';
 
@@ -24,6 +26,7 @@ export class FullLayoutComponent implements OnInit {
   constructor(private router:Router, 
               private _notificationService:NotifierService,
               private _authenticationService: AuthenticationService,
+              private _companyService:CompanyService,
               private _renderer: Renderer2,
               private modalService: BsModalService,
              // private _serviciosAFIPDelegadosService: ServiciosAFIPDelegadosService,
@@ -39,7 +42,11 @@ export class FullLayoutComponent implements OnInit {
         class: "modal-lg pt-0 shadow"
       }
      });     
-      
+     this._companyService.get().subscribe((result:Company) => {
+      if (result) {;
+        sessionStorage.setItem("FAC-COMPANY", JSON.stringify(result));
+      }
+    });
   }
   
    
