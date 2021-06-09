@@ -32,10 +32,10 @@ $foursquare: #1073af !default;
 $vimeo: #aad450 !default;
 // Navbar
 $navbar-height: 55px !default;
-$navbar-bg: #D80E70 !default;
+$navbar-bg: #3a7bd5 !default;
 $navbar-border: ( bottom: ( size: 1px, style: solid, color: $border-color)) !default;
 $navbar-brand-width: 155px !default;
-$navbar-brand-bg: #D80E70!default;
+$navbar-brand-bg: #3a7bd5!default;
 $navbar-brand-logo: url('../assets/img/logo-chico.png') !default;
 $navbar-brand-logo-size: 55% !default;
 $navbar-brand-border: ( bottom: ( size: 1px, style: solid, color: $border-color)) !default;
@@ -62,7 +62,7 @@ $sidebar-minimized-height: $sidebar-minimized-width !default;
 $sidebar-compact-width: 150px !default;
 $sidebar-compact-height: $sidebar-compact-width !default;
 $sidebar-color: #fff !default;
-$sidebar-bg: #D80E70 !default;
+$sidebar-bg: #3a7bd5 !default;
 $sidebar-borders: none !default;
 $mobile-sidebar-width: 220px !default;
 // Sidebar Header
@@ -162,7 +162,7 @@ $aside-menu-nav-padding-y: .75rem !default;
 $aside-menu-nav-padding-x: 1rem !default;
 // Footer
 $footer-height: 50px !default;
-$footer-bg: #d80e70 !default;
+$footer-bg: #3a7bd5 !default;
 $footer-color: $body-color !default;
 $footer-borders: ( top: ( size: 1px,
 style: solid,

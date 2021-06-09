@@ -41,7 +41,7 @@ h1.login-text {
 
 .btn-login {
     background-color: white;
-    color: #D80E70;
+    color: #3a7bd5;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     &:hover {
@@ -110,13 +110,11 @@ a {
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: rgba(157, 23, 77, 1);
-    background: -moz-linear-gradient(225deg, rgba(157, 23, 77, 1) 0%, rgba(244, 114, 182, 1) 100%);
-    background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(244, 114, 182, 1)), color-stop(100%, rgba(140, 68, 255, 1)));
-    background: -webkit-linear-gradient(225deg, rgba(157, 23, 77, 1) 0%, rgba(244, 114, 182, 1) 100%);
-    background: -o-linear-gradient(225deg, rgba(157, 23, 77, 1) 0%, rgba(244, 114, 182, 1) 100%);
-    background: -ms-linear-gradient(225deg, rgba(157, 23, 77, 1) 0%, rgba(244, 114, 182, 1) 100%);
-    background: linear-gradient(225deg, rgba(157, 23, 77, 1) 0%, rgba(244, 114, 182, 1) 100%);
+    background: #00d2ff;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+   
     &-flow {
         display: flex;
         flex-direction: row;
