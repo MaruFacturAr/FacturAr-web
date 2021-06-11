@@ -324,7 +324,8 @@ export abstract class BaseViewComponent {
             this.filterItems = [];
             debugger;
             let values = form.value;
-    
+            if(values === null || values === undefined)
+             return;
             Object.keys(values).forEach(key => {
                 
                 let filterName = key.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1").trim();//Camel Case

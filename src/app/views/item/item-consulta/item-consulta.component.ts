@@ -188,11 +188,64 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
   };
    return dataColumns;
   }
-  activar(row: any) {
-    throw new Error('Method not implemented.');
+  activar(data: any) {
+    let sinFactura:boolean = true
+    if (sinFactura){
+      const modal = this._modalService.show(AppModalComponent);
+      
+      (<AppModalComponent>modal.content).confirmLabel = 'SI';
+      (<AppModalComponent>modal.content).cancelLabel = 'NO';
+      (<AppModalComponent>modal.content).showConfirmationModal(
+          'Atencion!',this._translateService.instant('CMXGuias.ActivateQuestion', {id: data.id}));
+
+      (<AppModalComponent>modal.content).onClose.subscribe(result => {
+        if (result === true) {
+          this._itemService.activate(data).subscribe(
+            (val:any) => { 
+            this._notificationService.notify('success', this._translateService.instant('CMXGuias.ActivateSuccess', {id: data.id}));           
+              
+            this.showResult = false;
+            this.source.remove(data);
+            this.source.add(val)
+            sessionStorage.setItem('FAC-ITEMS', JSON.stringify(this.source));
+          },
+          error => {
+            this._notificationService.notify('error', this._translateService.instant('CMXError.Error100'));
+          });
+          
+        }
+    });
   }
-  desactivar(row: any) {
-    throw new Error('Method not implemented.');
+  }
+  desactivar(data: any) {
+    debugger;
+    let sinFactura:boolean = true
+    if (sinFactura){
+      const modal = this._modalService.show(AppModalComponent);
+      
+      (<AppModalComponent>modal.content).confirmLabel = 'SI';
+      (<AppModalComponent>modal.content).cancelLabel = 'NO';
+      (<AppModalComponent>modal.content).showConfirmationModal(
+          'Atencion!',this._translateService.instant('CMXGuias.DeactivateQuestion', {id: data.id}));
+
+      (<AppModalComponent>modal.content).onClose.subscribe(result => {
+        if (result === true) {
+          this._itemService.deactivate(data).subscribe(
+            (val:any) => { 
+            this._notificationService.notify('success', this._translateService.instant('CMXGuias.DeactivateSuccess', {id: data.id}));           
+              
+            this.showResult = false;
+            this.source.remove(data);
+            this.source.add(val)
+            sessionStorage.setItem('FAC-ITEMS', JSON.stringify(this.source));
+          },
+          error => {
+            this._notificationService.notify('error', this._translateService.instant('CMXError.Error100'));
+          });
+          
+        }
+    });
+  }
   }
   delete(data: any) {
     let sinFactura:boolean = true
@@ -213,8 +266,10 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
             this.showResult = false;
             
             this.source.remove(data);
+              //sessionStorage.setItem('FAC-ITEMS', JSON.stringify(this.source));
           },
           error => {
+            debugger;
             this._notificationService.notify('error', this._translateService.instant('CMXError.Error100'));
           });
           
@@ -248,9 +303,10 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
 
           instance.modificar.subscribe((row) => {                
             
-            
+            sessionStorage.setItem('FAC-ITEM', JSON.stringify(row));
 
-            this._router.navigate(['items/nuevo']);
+
+            this._router.navigate(['item/nuevo']);
           });
           
           instance.activar.subscribe((row) => {                

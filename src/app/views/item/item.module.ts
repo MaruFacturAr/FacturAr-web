@@ -22,7 +22,7 @@ import { FlagTableComponent } from 'app/components/flag-table/flag-table.compone
 
 const routes: Routes = [
   { path: '', component: ItemConsultaComponent, data: { title: 'Consulta' } },
-  { path: 'nuevo', component: ItemComponent, data: { title: 'Alta Producto o Servicio' } },
+  { path: 'nuevo', component: ItemComponent, data: { title: 'Alta o Modificación de Producto o Servicio' } },
  
   // { path: 'editar', component: GuiasEditarComponent, data: { title: 'Editar Guia' } },
   // { path: 'detalle/:id', component: GuiasDetalleComponent, data: { title: 'Guía N°' } }

@@ -80,6 +80,10 @@ export class RoutingState {
                         if(urlAfterRedirects.indexOf("/cajasespeciales") == -1){
                           this._cmxStorageService.removeCajasEspecialesStorage();
                         }
+
+                        if(urlAfterRedirects.indexOf("/item/nuevo")== -1){
+                          this._cmxStorageService.removeItemStorage();
+                        }
                         
                       
                         

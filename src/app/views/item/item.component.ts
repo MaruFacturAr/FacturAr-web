@@ -23,6 +23,7 @@ import { BaseViewComponent } from '../base.view.component';
 })
 export class ItemComponent extends BaseViewComponent implements OnInit {
   
+  item:Item;
   company:Company;
   item_types=[{id:1, name:'Producto'},
   {id:2, name:'Servicio'},
@@ -62,31 +63,57 @@ export class ItemComponent extends BaseViewComponent implements OnInit {
     ); 
    
     this.company = JSON.parse(sessionStorage.getItem("FAC-COMPANY"));
+   
+    this.item = JSON.parse(sessionStorage.getItem("FAC-ITEM"));
   }
 
   ngOnInit() {
-  }
+    if(this.item){
+      this.translateCompanyToForm();
+    }
+    }
 
-  map():Item{
-    let item = new Item();
-    item.id = 0;
-    item.code = this.CMXFormGroup.get("code").value;
-    item.alternative_code = this.CMXFormGroup.get("alternative_code").value;
-    item.name = this.CMXFormGroup.get("name").value;
-    item.item_type_id = this.CMXFormGroup.get("item_type_id").value;
-    item.status_id = 1
-    item.company_id = this.company.id;
-    item.price = this.CMXFormGroup.get("price").value;
-    item.description = this.CMXFormGroup.get("description").value;
-    item.currency_id = this.CMXFormGroup.get("currency_id").value;
-    item.created_date = moment(new Date()).toDate();
-    item.modified_date = moment(new Date()).toDate();
-    item.userId = this.currentUser.id;
-    return item;
+  translateCompanyToForm() {
+    if (this.item) {
+      this.CMXFormGroup.patchValue({
+        code: this.item.code,
+        alternative_code: this.item.alternative_code,
+        name: this.item.name,
+        item_type_id: this.item.item_type_id,
+        price: this.item.price,
+        description: this.item.description,
+        currency_id: this.item.currency_id
+      });
+  }
+}
+
+  map(){
+    if(this.item === null){
+    this.item = new Item();
+    this.item.id = 0;
+    this.item.status_id = 1
+    this.item.created_date = moment(new Date()).toDate();
+  }
+    this.item.code = this.CMXFormGroup.get("code").value;
+    this.item.alternative_code = this.CMXFormGroup.get("alternative_code").value;
+    this.item.name = this.CMXFormGroup.get("name").value;
+    this.item.item_type_id = this.CMXFormGroup.get("item_type_id").value;
+
+    this.item.company_id = this.company.id;
+    this.item.price = this.CMXFormGroup.get("price").value;
+    this.item.description = this.CMXFormGroup.get("description").value;
+    this.item.currency_id = this.CMXFormGroup.get("currency_id").value;
+    
+    this.item.modified_date = moment(new Date()).toDate();
+    this.item.userId = this.currentUser.id;
+    
   }
 
   onSave(){
-    this._itemService.register(this.map()).subscribe((result:Company)=>{
+    this.map();
+    this._itemService.register(this.item).subscribe((result:Item)=>{
+     
+      this.CMXFormGroup.reset();
       this._notificationService.notify('sucess', "Se grabó correctamente");
     }, error=>{
       this._notificationService.notify('error', error);

@@ -18,10 +18,10 @@ import { ViewCell } from "ng2-smart-table";
           <a href='javascript:void(0);' (click)='onModificar()' class='dropdown-item' *ngIf='showModificar'>
           <i class="far fa-edit text-primary"></i> Editar
           </a>
-          <a href='javascript:void(0);' (click)='onActivar()' class='dropdown-item' *ngIf='showView'>
+          <a href='javascript:void(0);' (click)='onActivar()' class='dropdown-item' *ngIf='showActivar'>
           <i class="far fa-check-circle text-primary"></i> Activar
           </a>
-          <a href='javascript:void(0);' (click)='onDesactivar()' class='dropdown-item' *ngIf='showView'>
+          <a href='javascript:void(0);' (click)='onDesactivar()' class='dropdown-item' *ngIf='showDesactivar'>
           <i class="far fa-times-circle text-primary"></i> Desactivar
           </a>
       </div>
@@ -53,7 +53,7 @@ import { ViewCell } from "ng2-smart-table";
     
     ngOnInit(){      
       this.showEliminar = true;
-      this.showModificar = true;
+      this.showModificar = this.rowData.status_id === 1;
       this.showActivar = this.rowData.status_id === 2;
       this.showDesactivar = this.rowData.status_id === 1;
     }

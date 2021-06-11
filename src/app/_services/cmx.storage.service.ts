@@ -91,8 +91,13 @@ export class CMXStorageService {
   }
 
   public removeCompanyStorage(){
-    this._sessionStorage.clear("FAC-COMPANY");
+    sessionStorage.removeItem("FAC-COMPANY");
   }
   
+  public removeItemStorage(){
+    sessionStorage.removeItem("FAC-ITEM");
+    sessionStorage.removeItem("FAC-ITEMS");
+    sessionStorage.removeItem("FAC-ITEMS-FILTROS");
+  }
   
 }

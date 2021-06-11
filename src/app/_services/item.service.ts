@@ -1,4 +1,5 @@
 import { HttpClient } from "@angular/common/http";
+import { identifierModuleUrl } from "@angular/compiler";
 import { Injectable } from "@angular/core";
 import { Item } from "app/_models/item.model";
 import { CMXConfig } from "config/config";
@@ -33,7 +34,17 @@ export class ItemService{
         return this.http.post(CMXConfig.environment.apiURL + `/items/create`, obj);
     }
 
-    delete(id){
+    activate(data:any) {
+      let obj = Object.assign({}, data);
+      return this.http.post(CMXConfig.environment.apiURL + `/items/activate`, obj);
+  }
+
+  deactivate(data:any) {
+    let obj = Object.assign({}, data);
+    return this.http.post(CMXConfig.environment.apiURL + `/items/deactivate`,obj);
+  }
+
+  delete(id){
       let itemURL = CMXConfig.environment.apiURL  + '/items/' + id;
   
       itemURL.replace('\?\&', '?');

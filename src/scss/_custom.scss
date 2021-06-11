@@ -182,9 +182,9 @@ ng2-smart-table {
             }
         }
         tbody tr td:not(.docuPSAD) {
-            padding: .5rem!important;
+            padding: .2rem!important;
             word-break: break-word;
-            font-size: .78rem!important;
+            font-size: .875rem!important;
         }
         .ng2-smart-filters {
             @include media-breakpoint-down(md) {
