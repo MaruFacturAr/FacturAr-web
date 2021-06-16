@@ -70,7 +70,7 @@ export class CompanyComponent extends BaseViewComponent implements OnInit {
     );
 
     this.company = JSON.parse(sessionStorage.getItem("FAC-COMPANY"));
-    debugger;
+    
     if(this.provinces.length == 0)
     this._provinceService.getAll().subscribe((result) =>{
       this.provinces = result;
@@ -127,7 +127,7 @@ export class CompanyComponent extends BaseViewComponent implements OnInit {
     {
       this.initialCompany();
     }
-    debugger;
+    
     this.company.iibb_code = this.CMXFormGroup.get("iibb_code").value;
     this.company.initial_date = this.CMXFormGroup.get("initial_date").value;
     this.company.billingData.fantasy_name = this.CMXFormGroup.get("fantasy_name").value;

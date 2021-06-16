@@ -15,6 +15,7 @@ import { NotifierService } from "angular-notifier";
 import { ActionsTableComponent } from 'app/components/action-table/action.table.component';
 import { AppModalComponent } from 'app/components/app-modal/app-modal.component';
 import { FlagTableComponent } from 'app/components/flag-table/flag-table.component';
+import { Item } from 'app/_models/item.model';
 
 @Component({
   selector: 'app-item-consulta',
@@ -52,11 +53,13 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
       _router,
       _sessionStorageService
     ); 
+   
     this.items = JSON.parse(sessionStorage.getItem('FAC-ITEMS'));
     this.filtros = JSON.parse(sessionStorage.getItem('FAC-ITEMS-FILTROS'));
   }
 
   ngOnInit() {
+    
     if (this.filtros) {
       this.loadDataFromStorage();
     } else {
@@ -156,6 +159,40 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
 
 }
 
+
+loadFromServer(items: Item[]) {
+  this.createFormFiltersTags(this.CMXFormGroup);
+
+  try {
+    this.items = items;
+    sessionStorage.setItem('FAC-ITEMS', JSON.stringify(items));
+  } catch (error) {
+      console.warn("Session Storage - Storage OverQuoted");
+      sessionStorage.removeItem("FAC-ITEMS");
+  }
+
+  this.totalRows = items.length;
+
+  this.filtros = Object.assign({}, this.CMXFormGroup.value);
+  sessionStorage.setItem('FAC-ITEMS-FILTROS', JSON.stringify(this.filtros));
+
+  this.source.load(items);
+  this.calculatePaginatorText(1, this.totalRows);
+  this.setPaginationPosition();
+
+  if (items.length > 0) {
+      this.showResult = true;
+      this.showFormSearch = false;
+  } else {
+      if (!this.isFirstSearch) {
+          this._notificationService.notify('warning', this._translateService.instant('CMXError.Error_000'));
+      } else {
+          this._notificationService.notify('warning', this._translateService.instant('CMXError.Error_202'));
+      }
+      this.resetForm();
+  }
+}
+
   resetFilters() {
     this.CMXFormGroup.reset();
     this.resetForm();
@@ -202,12 +239,19 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
         if (result === true) {
           this._itemService.activate(data).subscribe(
             (val:any) => { 
+
+              let items = this.items;
+
+              const index = items.findIndex(n => n.id === val.id);
+              if (index !== -1) {
+                items[index].status_id = val.status_id;
+
+              //notificaciones = notificaciones.filter(n => n.estado !== notificacionEstado.Eliminada);
+              this.loadFromServer(items);
             this._notificationService.notify('success', this._translateService.instant('CMXGuias.ActivateSuccess', {id: data.id}));           
               
-            this.showResult = false;
-            this.source.remove(data);
-            this.source.add(val)
-            sessionStorage.setItem('FAC-ITEMS', JSON.stringify(this.source));
+          }
+            //sessionStorage.setItem('FAC-ITEMS', JSON.stringify(this.source));
           },
           error => {
             this._notificationService.notify('error', this._translateService.instant('CMXError.Error100'));
@@ -218,7 +262,7 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
   }
   }
   desactivar(data: any) {
-    debugger;
+    ;
     let sinFactura:boolean = true
     if (sinFactura){
       const modal = this._modalService.show(AppModalComponent);
@@ -231,13 +275,20 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
       (<AppModalComponent>modal.content).onClose.subscribe(result => {
         if (result === true) {
           this._itemService.deactivate(data).subscribe(
-            (val:any) => { 
+              (val:any) => { 
+
+              let items = this.items;
+
+              const index = items.findIndex(n => n.id === val.id);
+              if (index !== -1) {
+                items[index].status_id = val.status_id;
+
+
+                //notificaciones = notificaciones.filter(n => n.estado !== notificacionEstado.Eliminada);
+                this.loadFromServer(items);
             this._notificationService.notify('success', this._translateService.instant('CMXGuias.DeactivateSuccess', {id: data.id}));           
               
-            this.showResult = false;
-            this.source.remove(data);
-            this.source.add(val)
-            sessionStorage.setItem('FAC-ITEMS', JSON.stringify(this.source));
+              }
           },
           error => {
             this._notificationService.notify('error', this._translateService.instant('CMXError.Error100'));
@@ -269,7 +320,7 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
               //sessionStorage.setItem('FAC-ITEMS', JSON.stringify(this.source));
           },
           error => {
-            debugger;
+            
             this._notificationService.notify('error', this._translateService.instant('CMXError.Error100'));
           });
           
@@ -304,7 +355,7 @@ export class ItemConsultaComponent extends BaseViewComponent implements OnInit {
           instance.modificar.subscribe((row) => {                
             
             sessionStorage.setItem('FAC-ITEM', JSON.stringify(row));
-
+            this.resetForm();
 
             this._router.navigate(['item/nuevo']);
           });

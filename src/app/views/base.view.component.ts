@@ -76,9 +76,9 @@ export abstract class BaseViewComponent {
 
                 Object.keys(sessionStorage).forEach(key => {
 
-                    if(key.endsWith('filtros')) {
-                        const keyName = key.replace('ngx-webstorage|', '');
-                        let filtros = this._sessionStorage.retrieve(keyName);
+                    if(key.toLowerCase().endsWith('filtros')) {
+                        
+                        let filtros = JSON.parse(sessionStorage.getItem(key));
 
                         switch(e.action){
 
@@ -86,11 +86,12 @@ export abstract class BaseViewComponent {
                             filtros.pagina = e.paging.page
                             break;
                         case 'filter':
-                            filtros.tableFilters = e.filter.filters;
+                            const filters = e.filter.filters.filter(f => f.search);
+                            filtros.tableFilters = filters.length > 0 ? filters : undefined;
                             break;
                         }
 
-                        this._sessionStorage.store(keyName, filtros);
+                        sessionStorage.setItem(key, JSON.stringify(filtros));
                     }
                 })
 
@@ -322,7 +323,7 @@ export abstract class BaseViewComponent {
         setTimeout(() => {
             
             this.filterItems = [];
-            debugger;
+            
             let values = form.value;
             if(values === null || values === undefined)
              return;

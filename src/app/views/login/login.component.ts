@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    debugger;
+    
     this.loading = true;
 
     //this.router.navigateByUrl('/dashboard');

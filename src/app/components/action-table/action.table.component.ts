@@ -52,7 +52,7 @@ import { ViewCell } from "ng2-smart-table";
     @Output() desactivar: EventEmitter<any> = new EventEmitter();
     
     ngOnInit(){      
-      this.showEliminar = true;
+      this.showEliminar = false;
       this.showModificar = this.rowData.status_id === 1;
       this.showActivar = this.rowData.status_id === 2;
       this.showDesactivar = this.rowData.status_id === 1;

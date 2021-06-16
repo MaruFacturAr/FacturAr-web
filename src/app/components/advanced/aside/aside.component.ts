@@ -107,7 +107,7 @@ export class NgxAsideComponent {
 
   private addOverlay() {
     if (!this.backdrop && this.showOverlay) {
-      debugger;
+      
       const OverlayComponentFactory = this._resolver.resolveComponentFactory(NgxOverlayComponent);
       this.backdrop = this.rootViewContainerRef.createComponent(OverlayComponentFactory, 0);
     }

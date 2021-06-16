@@ -22,13 +22,14 @@ import { BaseViewComponent } from '../base.view.component';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent extends BaseViewComponent implements OnInit {
-  
-  item:Item;
-  company:Company;
-  item_types=[{id:1, name:'Producto'},
-  {id:2, name:'Servicio'},
-  {id:3, name:'Producto y Servicio'}];
-  currency:any=[{id:2, name:'PESOS'}, {id:3, name:'Dólar ESTADOUNIDENSE'}];
+
+  item: Item;
+  items: Item[];
+  company: Company;
+  item_types = [{ id: 1, name: 'Producto' },
+  { id: 2, name: 'Servicio' },
+  { id: 3, name: 'Producto y Servicio' }];
+  currency: any = [{ id: 2, name: 'PESOS' }, { id: 3, name: 'Dólar ESTADOUNIDENSE' }];
 
   CMXFormGroup = new FormGroup({
 
@@ -39,8 +40,8 @@ export class ItemComponent extends BaseViewComponent implements OnInit {
     description: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
     price: new FormControl('', [Validators.required, Validators.pattern(new RegExp(/^\d+$/))]),
     currency_id: new FormControl('', Validators.required),
-   // status_id: new FormControl('', Validators.required),
-    
+    // status_id: new FormControl('', Validators.required),
+
   });
   constructor(private _itemService: ItemService,
     private _companyService: CompanyService,
@@ -60,18 +61,19 @@ export class ItemComponent extends BaseViewComponent implements OnInit {
       _translateService,
       _router,
       _sessionStorageService
-    ); 
-   
+    );
+
     this.company = JSON.parse(sessionStorage.getItem("FAC-COMPANY"));
-   
+    this.items = JSON.parse(sessionStorage.getItem('FAC-ITEMS'));
     this.item = JSON.parse(sessionStorage.getItem("FAC-ITEM"));
+
   }
 
   ngOnInit() {
-    if(this.item){
+    if (this.item) {
       this.translateCompanyToForm();
     }
-    }
+  }
 
   translateCompanyToForm() {
     if (this.item) {
@@ -84,16 +86,16 @@ export class ItemComponent extends BaseViewComponent implements OnInit {
         description: this.item.description,
         currency_id: this.item.currency_id
       });
+    }
   }
-}
 
-  map(){
-    if(this.item === null){
-    this.item = new Item();
-    this.item.id = 0;
-    this.item.status_id = 1
-    this.item.created_date = moment(new Date()).toDate();
-  }
+  map() {
+    if (this.item === null) {
+      this.item = new Item();
+      this.item.id = 0;
+      this.item.status_id = 1
+      this.item.created_date = moment(new Date()).toDate();
+    }
     this.item.code = this.CMXFormGroup.get("code").value;
     this.item.alternative_code = this.CMXFormGroup.get("alternative_code").value;
     this.item.name = this.CMXFormGroup.get("name").value;
@@ -103,39 +105,56 @@ export class ItemComponent extends BaseViewComponent implements OnInit {
     this.item.price = this.CMXFormGroup.get("price").value;
     this.item.description = this.CMXFormGroup.get("description").value;
     this.item.currency_id = this.CMXFormGroup.get("currency_id").value;
-    
+
     this.item.modified_date = moment(new Date()).toDate();
     this.item.userId = this.currentUser.id;
-    
+
   }
 
-  onSave(){
+  onSave() {
     this.map();
-    this._itemService.register(this.item).subscribe((result:Item)=>{
-     
-      this.CMXFormGroup.reset();
-      this._notificationService.notify('sucess', "Se grabó correctamente");
-    }, error=>{
-      this._notificationService.notify('error', error);
-    });
+    this._itemService.register(this.item).subscribe((result: Item) => {
+      if(this.items)
+      {
+      let items = this.items;
+      const index = items.findIndex(n => n.id === result.id);
+      if (index !== -1) {
+        items[index] = result;
+      }else{
+        items.push(result);
+      }
+      try {
+        this.items = items;
+        sessionStorage.setItem('FAC-ITEMS', JSON.stringify(items));
+      } catch (error) {
+          console.warn("Session Storage - Storage OverQuoted");
+          sessionStorage.removeItem("FAC-ITEMS");
+      }
+
+    }
+        this.CMXFormGroup.reset();
+        this._notificationService.notify('success', "Se grabó correctamente");
+      }, error => {
+        this._notificationService.notify('error', error);
+      });
   }
   protected observableForExcelReport() {
-    
+
   }
   protected getExcelDataColumns() {
-    
+
   }
   protected getExcelReportName() {
-    
+
   }
   protected getExcludedExcelDataColumns() {
-    
+
   }
   protected pageChanged(data: any) {
-   
+
   }
   protected getDataColumns() {
-   
+
   }
 
 
