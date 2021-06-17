@@ -71,11 +71,11 @@ export class ItemComponent extends BaseViewComponent implements OnInit {
 
   ngOnInit() {
     if (this.item) {
-      this.translateCompanyToForm();
+      this.translateItemToForm();
     }
   }
 
-  translateCompanyToForm() {
+  translateItemToForm() {
     if (this.item) {
       this.CMXFormGroup.patchValue({
         code: this.item.code,

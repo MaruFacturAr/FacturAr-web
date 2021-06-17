@@ -84,8 +84,10 @@ export class RoutingState {
                         if(urlAfterRedirects.indexOf("/item/nuevo")== -1){
                           this._cmxStorageService.removeItemStorage();
                         }
-                        
-                      
+
+                        if(urlAfterRedirects.indexOf("/counterfoil/nuevo")== -1){
+                          this._cmxStorageService.removeCounterfoilStorage();
+                        }         
                         
       });
   }

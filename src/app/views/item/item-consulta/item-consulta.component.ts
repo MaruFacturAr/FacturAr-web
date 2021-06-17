@@ -371,7 +371,7 @@ loadFromServer(items: Item[]) {
       },  
       id: { title: 'id'},
       code: { title: 'Código'},
-      alternative_code: { title: 'Código Alternativo'},
+      name: { title: 'Nombre'},
       description: { title: 'Descripcion'},
       price: { title: 'Precio',  type: 'custom',
       renderComponent: AmountComponent,

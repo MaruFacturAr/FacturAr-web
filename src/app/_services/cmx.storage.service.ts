@@ -99,5 +99,11 @@ export class CMXStorageService {
     sessionStorage.removeItem("FAC-ITEMS");
     sessionStorage.removeItem("FAC-ITEMS-FILTROS");
   }
+
+  public removeCounterfoilStorage(){
+    sessionStorage.removeItem("FAC-COUNTERFOIL");
+    sessionStorage.removeItem("FAC-COUNTERFOILS");
+    sessionStorage.removeItem("FAC-COUNTERFOILS-FILTROS");
+  }
   
 }

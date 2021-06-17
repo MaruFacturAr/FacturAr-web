@@ -1,0 +1,75 @@
+<div class="card shadow-sm">
+    <div class="card-header formTitle">
+        <div class="row">
+            <div class="col-6">
+                <h5 class="mb-0">
+                    <i class="fas fa-ticket-alt"></i> Talonario
+                </h5>
+            </div>
+        </div>
+    </div>
+    
+    <form [formGroup]="CMXFormGroup" (ngSubmit)="onSave()">
+        <div class="card-body">
+            <div class="row" *ngIf="company == null">
+                <div class="col">
+                    <div class="alert alert-danger">
+                        <span class="alert-heading">
+                            <i class="fas fa-exclamation-triangle"></i> IMPORTANTE: Debe completar la info Negocio antes de
+                            crear el talonario.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCode">Código</label>
+                    <input type="text" class="form-control" id="inputCode" formControlName="code" placeholder="Código">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputName">Nombre</label>
+                    <input type="tex" class="form-control" id="inputName" formControlName="name" placeholder="Nombre">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputVoucher_type_id">Tipo</label>
+                    <select id="inputVoucher_type_id" class="form-control" formControlName="voucher_type_id">
+                        <option *ngFor="let t of voucher_types" [ngValue]="t.id">
+                            {{t.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputFromNumber">Número desde</label>
+                    <input type="number" class="form-control" id="inputFromNumber" formControlName="from_number"
+                        placeholder="número desde">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputNextNumber">Próximo número</label>
+                    <input type="number" class="form-control" id="inputNextNumber" formControlName="next_number"
+                        placeholder="próximo numero">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputToNumber">Número hasta</label>
+                    <input type="text" class="form-control" id="inputToNumber" formControlName="to_number"
+                        placeholder="número hasta 99999999">
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-footer">
+            <div class="row">
+                <div class="col text-right">
+                    <!-- <label  class="col-sm-4 col-form-label">{{appFileUploadR.uploader?.queue.length}}</label> -->
+                    <button class="btn btn-primary" type="submit"  [disabled]="!CMXFormGroup.valid || company == null" >
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

@@ -16,8 +16,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ItemService } from 'app/_services/item.service';
-import { ActionsTableComponent } from 'app/components/action-table/action.table.component';
-import { FlagTableComponent } from 'app/components/flag-table/flag-table.component';
+
 
 
 const routes: Routes = [
@@ -31,9 +30,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ItemComponent,
-    ItemConsultaComponent,
-    FlagTableComponent,
-    ActionsTableComponent ],
+    ItemConsultaComponent
+     ],
 
   imports: [
     CommonModule,
@@ -57,8 +55,7 @@ const routes: Routes = [
         RouterModule.forChild(routes)
   ],
   entryComponents: [
-    FlagTableComponent,
-    ActionsTableComponent
+    
 ],
   providers: [
     ItemService

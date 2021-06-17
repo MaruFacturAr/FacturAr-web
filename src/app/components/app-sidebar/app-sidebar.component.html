@@ -27,6 +27,20 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0)" *appHasRole='["A"]'>
+                    <i class="fas fa-ticket-alt"></i> Talonario</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item" *appHasRole='["A"]'>
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/counterfoil/nuevo']">
+                            <i class="fas fa-ticket-alt"></i> Nuevo</a>
+                    </li>
+                    <li class="nav-item" *appHasRole='["A"]'>
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/counterfoil']">
+                            <i class="fas fa-ticket-alt"></i> Consultar</a>
+                    </li>
+                </ul>
+            </li>
             <!-- <li class="nav-item" *appHasRole='["A","800"]'>
                 <a class="nav-link" routerLinkActive="active" [routerLink]="['/declaraciones']">
                     <i class="fas fa-archive"></i> Productos

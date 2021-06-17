@@ -77,6 +77,8 @@ import {AccordionModule} from 'ngx-bootstrap/accordion';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {PopoverModule} from 'ngx-bootstrap/popover';
 import { NotifierModule } from 'angular-notifier';
+import { ActionsTableComponent } from './components/action-table/action.table.component';
+import { FlagTableComponent } from './components/flag-table/flag-table.component';
 
 
 
@@ -188,6 +190,8 @@ const DIRECTIVES = [
     TableDateComponent,
     TableDateTimeComponent,
     TableClienteComponent,
+    FlagTableComponent,
+    ActionsTableComponent,
     AmountComponent,
     CUITPipe,
     ...APP_PERFIL_COMPONENTS,
@@ -204,6 +208,8 @@ const DIRECTIVES = [
     TableDateComponent,
     TableDateTimeComponent, 
     TableClienteComponent, 
+    FlagTableComponent,
+    ActionsTableComponent
     //ServicioMoaNoDelegadoComponent
   ],
   providers: [
