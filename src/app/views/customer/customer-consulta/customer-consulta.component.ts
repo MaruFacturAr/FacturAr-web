@@ -4,27 +4,26 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { ActionsTableComponent } from 'app/components/action-table/action.table.component';
-import { AmountComponent } from 'app/components/Amount/Amount.component';
 import { AppModalComponent } from 'app/components/app-modal/app-modal.component';
 import { FlagTableComponent } from 'app/components/flag-table/flag-table.component';
 import { BaseViewComponent } from 'app/views/base.view.component';
 import { CMXAnimations } from 'app/_helpers/animations';
-import { Counterfoil } from 'app/_models/counterfoil.model';
+import { Customer } from 'app/_models/customer.model';
 import { AuthenticationService } from 'app/_services/authentication.service';
-import { CounterfoilService } from 'app/_services/counterfoil.service';
+import { CustomerService } from 'app/_services/customer.service';
 import { ExcelService } from 'app/_services/excel.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-counterfoil-consulta',
-  templateUrl: './counterfoil-consulta.component.html',
-  styleUrls: ['./counterfoil-consulta.component.scss'],
+  selector: 'app-customer-consulta',
+  templateUrl: './customer-consulta.component.html',
+  styleUrls: ['./customer-consulta.component.scss'],
   animations: [ CMXAnimations ]
 })
-export class CounterfoilConsultaComponent  extends BaseViewComponent implements OnInit {
-  counterfoils:any;
+export class CustomerConsultaComponent  extends BaseViewComponent implements OnInit {
+  customers:any;
   filtros:any;
  
    CMXFormGroup = new FormGroup({
@@ -35,7 +34,7 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
    });
    @ViewChild("smartTable") smartTable: ElementRef;
  
-   constructor(private _counterfoilService: CounterfoilService,
+   constructor(private _customerService: CustomerService,
      private _modalService: BsModalService,
      _router: Router,
      _excelService: ExcelService,
@@ -54,8 +53,8 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
        _sessionStorageService
      ); 
     
-     this.counterfoils = JSON.parse(sessionStorage.getItem('FAC-COUNTERFOILS'));
-     this.filtros = JSON.parse(sessionStorage.getItem('FAC-COUNTERFOILS-FILTROS'));
+     this.customers = JSON.parse(sessionStorage.getItem('FAC-CUSTOMERS'));
+     this.filtros = JSON.parse(sessionStorage.getItem('FAC-CUSTORMERS-FILTROS'));
    }
  
    ngOnInit() {
@@ -81,7 +80,7 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
  }
  
    doFormSearch() {
-     this._counterfoilService.getAllByCodeOrName(this.CMXFormGroup.value).subscribe((result:any) => {
+     this._customerService.getAllByCodeOrName(this.CMXFormGroup.value).subscribe((result:any) => {
  
    this.createFormFiltersTags(this.CMXFormGroup);
  
@@ -91,17 +90,17 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
              this.showFormSearch = false;
  
              try {
-                 this.counterfoils = result;
-                 sessionStorage.setItem('FAC-COUNTERFOILS', JSON.stringify(result));
+                 this.customers = result;
+                 sessionStorage.setItem('FAC-CUSTOMERS', JSON.stringify(result));
              } catch (error) {
                  console.warn("Session Storage - Storage OverQuoted");
-                 sessionStorage.removeItem("FAC-COUNTERFOILS");
+                 sessionStorage.removeItem("FAC-CUSTOMERS");
              }
  
              this.totalRows = result.length;
  
              this.filtros = Object.assign({}, this.CMXFormGroup.value);
-             sessionStorage.setItem('FAC-COUNTERFOILS-FILTROS', JSON.stringify(this.filtros));
+             sessionStorage.setItem('FAC-CUSTOMERS-FILTROS', JSON.stringify(this.filtros));
  
              this.source.load(result);
              this.calculatePaginatorText(1, this.totalRows);
@@ -122,9 +121,9 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
  
      this.showResult = true;
      this.isFirstSearch = false;
-     this.totalRows = this.counterfoils.length;
+     this.totalRows = this.customers.length;
      
-     this.source.load(this.counterfoils);
+     this.source.load(this.customers);
      
      if(this.filtros.tableFilters){
  
@@ -160,27 +159,27 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
  }
  
  
- loadFromServer(counterfoils: Counterfoil[]) {
+ loadFromServer(customers: Customer[]) {
    this.createFormFiltersTags(this.CMXFormGroup);
  
    try {
-     this.counterfoils = counterfoils;
-     sessionStorage.setItem('FAC-COUNTERFOILS', JSON.stringify(counterfoils));
+     this.customers = customers;
+     sessionStorage.setItem('FAC-CUSTOMERS', JSON.stringify(customers));
    } catch (error) {
        console.warn("Session Storage - Storage OverQuoted");
-       sessionStorage.removeItem("FAC-COUNTERFOILS");
+       sessionStorage.removeItem("FAC-CUSTOMERS");
    }
  
-   this.totalRows = counterfoils.length;
+   this.totalRows = customers.length;
  
    this.filtros = Object.assign({}, this.CMXFormGroup.value);
-   sessionStorage.setItem('FAC-COUNTERFOILS-FILTROS', JSON.stringify(this.filtros));
+   sessionStorage.setItem('FAC-CUSTOMERS-FILTROS', JSON.stringify(this.filtros));
  
-   this.source.load(counterfoils);
+   this.source.load(customers);
    this.calculatePaginatorText(1, this.totalRows);
    this.setPaginationPosition();
  
-   if (counterfoils.length > 0) {
+   if (customers.length > 0) {
        this.showResult = true;
        this.showFormSearch = false;
    } else {
@@ -199,29 +198,26 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
    }
    protected observableForExcelReport() {
  
-     if(this.counterfoils){
+     if(this.customers){
          
          const simpleObservable = new Observable((observer) => {
-             observer.next(this.counterfoils);
+             observer.next(this.customers);
              observer.complete()
          })
      
          return simpleObservable;
      }
  
-     return this._counterfoilService.getAllByCodeOrName(this.CMXFormGroup.value);
+     return this._customerService.getAllByCodeOrName(this.CMXFormGroup.value);
  
    }
    protected getExcelDataColumns() {
      
      let dataColumns:any = {
        id: 'id',
-       code: 'Código',
-       name: 'Nombre',
-       from_number: 'Número Desde',
-       next_number: 'Número Próximo',
-       to_number: 'Número Hasta'
- 
+       "billing_data_id.legal_name": 'Razon social',
+       "billing_data_id.fantasy_name": 'Nombre comercial',
+       "billing_data_id.email": 'Email'
    };
     return dataColumns;
    }
@@ -233,21 +229,21 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
        (<AppModalComponent>modal.content).confirmLabel = 'SI';
        (<AppModalComponent>modal.content).cancelLabel = 'NO';
        (<AppModalComponent>modal.content).showConfirmationModal(
-           'Atencion!',this._translateService.instant('CMXGuias.ActivateCounterfoilQuestion', {id: data.id}));
+           'Atencion!',this._translateService.instant('CMXGuias.ActivateCustomerQuestion', {id: data.id}));
  
        (<AppModalComponent>modal.content).onClose.subscribe(result => {
          if (result === true) {
-           this._counterfoilService.activate(data).subscribe(
+           this._customerService.activate(data).subscribe(
              (val:any) => { 
  
-               let counterfoils = this.counterfoils;
+               let customers = this.customers;
  
-               const index = counterfoils.findIndex(n => n.id === val.id);
+               const index = customers.findIndex(n => n.id === val.id);
                if (index !== -1) {
-                counterfoils[index].status_id = val.status_id;
+                customers[index].status_id = val.status_id;
  
                //notificaciones = notificaciones.filter(n => n.estado !== notificacionEstado.Eliminada);
-               this.loadFromServer(counterfoils);
+               this.loadFromServer(customers);
              this._notificationService.notify('success', this._translateService.instant('CMXGuias.ActivateCustomerSuccess', {id: data.id}));           
                
            }
@@ -262,7 +258,7 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
    }
    }
    desactivar(data: any) {
-
+     ;
      let sinFactura:boolean = true
      if (sinFactura){
        const modal = this._modalService.show(AppModalComponent);
@@ -270,22 +266,22 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
        (<AppModalComponent>modal.content).confirmLabel = 'SI';
        (<AppModalComponent>modal.content).cancelLabel = 'NO';
        (<AppModalComponent>modal.content).showConfirmationModal(
-           'Atencion!',this._translateService.instant('CMXGuias.DeactivateCounterfoilQuestion', {id: data.id}));
+           'Atencion!',this._translateService.instant('CMXGuias.DeactivateCustomerQuestion', {id: data.id}));
  
        (<AppModalComponent>modal.content).onClose.subscribe(result => {
          if (result === true) {
-           this._counterfoilService.deactivate(data).subscribe(
+           this._customerService.deactivate(data).subscribe(
                (val:any) => { 
  
-               let counterfoils = this.counterfoils;
+               let customers = this.customers;
  
-               const index = counterfoils.findIndex(n => n.id === val.id);
+               const index = customers.findIndex(n => n.id === val.id);
                if (index !== -1) {
-                counterfoils[index].status_id = val.status_id;
+                customers[index].status_id = val.status_id;
  
  
                  //notificaciones = notificaciones.filter(n => n.estado !== notificacionEstado.Eliminada);
-                 this.loadFromServer(counterfoils);
+                 this.loadFromServer(customers);
              this._notificationService.notify('success', this._translateService.instant('CMXGuias.DeactivateCustomerSuccess', {id: data.id}));           
                
                }
@@ -306,13 +302,13 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
        (<AppModalComponent>modal.content).confirmLabel = 'SI';
        (<AppModalComponent>modal.content).cancelLabel = 'NO';
        (<AppModalComponent>modal.content).showConfirmationModal(
-           'Atencion!',this._translateService.instant('CMXGuias.RemoveCounterfoilQuestion', {id: data.id}));
+           'Atencion!',this._translateService.instant('CMXGuias.RemoveCustomerQuestion', {id: data.id}));
  
        (<AppModalComponent>modal.content).onClose.subscribe(result => {
          if (result === true) {
-           this._counterfoilService.delete(data.id).subscribe(
+           this._customerService.delete(data.id).subscribe(
              (val) => { 
-             this._notificationService.notify('success', this._translateService.instant('CMXGuias.RemoveCounterfoilSuccess', {id: data.id}));           
+             this._notificationService.notify('success', this._translateService.instant('CMXGuias.RemoveCustomerSuccess', {id: data.id}));           
                
              this.showResult = false;
              
@@ -329,10 +325,10 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
    }
    }
    protected getExcelReportName() {
-     return 'Counterfoils';
+     return 'Customers';
    }
    protected getExcludedExcelDataColumns() {
-     return ['voucher_type_id', 'status_id', 'company_id', 'userId'];
+     return ['phone', 'address', 'company_id', 'userId'];
    }
  
    protected pageChanged(data: any) {
@@ -354,10 +350,10 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
  
            instance.modificar.subscribe((row) => {                
              
-             sessionStorage.setItem('FAC-COUNTERFOIL', JSON.stringify(row));
+             sessionStorage.setItem('FAC-CUSTOMER', JSON.stringify(row));
              this.resetForm();
  
-             this._router.navigate(['counterfoil/nuevo']);
+             this._router.navigate(['customer/nuevo']);
            });
            
            instance.activar.subscribe((row) => {                
@@ -370,11 +366,24 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
          }  
        },  
        id: { title: 'id'},
-       code: { title: 'Código'},
-       name: { title: 'Nombre'},
-       from_number: { title: 'Número Desde'},
-       next_number: { title: 'Número Próximo'},
-       to_number: { title: 'Número Hasta'},
+       fantasy_name: { title: 'Nombre Comercial',
+       type:'string',
+       valuePrepareFunction: (cell, row) => {
+        return row.billing_data_id.fantasy_name;
+    }
+      },
+       legal_name: { title: 'Razon Social',
+       type:'string',
+       valuePrepareFunction: (cell, row) => {
+        return row.billing_data_id.legal_name;
+       }
+      },
+      email: { title: 'Email',
+      type:'string',
+       valuePrepareFunction: (cell, row) => {
+        return row.billing_data_id.email;
+       }
+      },
        status_id : {  
          title: 'Estado', 
          type: 'custom',

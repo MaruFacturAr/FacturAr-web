@@ -57,6 +57,12 @@ export const routes: Routes = [
         loadChildren: () => import('./views/counterfoil/counterfoil.module').then(m => m.CounterfoilModule),
         canActivate: [AuthGuard]
       },
+      {
+        path: 'customer',
+        data: { title: 'Cliente' },
+        loadChildren: () => import('./views/customer/customer.module').then(m => m.CustomerModule),
+        canActivate: [AuthGuard]
+      },
     ]
   },
   { path: 'login', component: LoginComponent },

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-6">
                 <h5 class="mb-0">
-                    <i class="far fa-building"></i> Información sobre su Negocio
+                    <i class="far fa-user"></i>  Cliente
                     <!-- <fa-icon [icon]='faFileInvoice' class='mr-2'></fa-icon> {{ 'CMXEstadoCuenta.ComprobantePago' | translate }} -->
                 </h5>
             </div>
@@ -11,6 +11,16 @@
     </div>
     <form [formGroup]="CMXFormGroup" (ngSubmit)="onSave()">
         <div class="card-body">
+          <div class="row" *ngIf="company == null">
+            <div class="col">
+                <div class="alert alert-danger">
+                    <span class="alert-heading">
+                        <i class="fas fa-exclamation-triangle"></i> IMPORTANTE: Debe completar la info Negocio antes de
+                        crear un cliente.
+                    </span>
+                </div>
+            </div>
+        </div>
             <h1 class="display-6 mb-3 pb-2 border-bottom border-secondary">Datos Facturación</h1>
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -24,16 +34,6 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="inputIIBB">Ingresos Brutos </label>
-                  <input type="text" class="form-control" id="inputIIBB" formControlName="iibb_code" placeholder="Ingresos Brutos">
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputInitialDate">Fecha de inicio de actividades</label>
-                  <input type="tex" class="form-control" id="inputInitialDate" formControlName="initial_date" bsDatepicker [bsConfig]="bsConfig" [maxDate]="maxDate">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
                   <label for="inputtaxpayer_type_id">Condición frente al IVA</label>
                   <select id="inputtaxpayer_type_id" class="form-control" formControlName="taxpayer_type_id" >
                     <option *ngFor="let t of taxpayerTypes" [ngValue]="t.id">
@@ -42,13 +42,24 @@
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="inputCUIT">CUIT</label>
-                  <input type="text" class="form-control" id="inputCUIT" formControlName="number" placeholder="CUIT">
-                </div>
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control" id="inputEmail4" formControlName="email" placeholder="Email">
+                  </div>
               </div>
-              <div class="form-group">
-                <label for="inputEmail4">Email</label>
-                <input type="email" class="form-control" id="inputEmail4" formControlName="email" placeholder="Email">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputdocument_type_id">Tipo de documento</label>
+                    <select id="inputdocument_type_id" class="form-control" formControlName="document_type_id" >
+                      <option *ngFor="let t of documentTypes" [ngValue]="t.id">
+                        {{t.name}}
+                    </option>                
+                    </select>
+                  </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCUIT">Documento</label>
+                    <input type="text" class="form-control" id="inputCUIT" formControlName="number" placeholder="Documento">
+                  </div>
+              
               </div>
               <!-- <div class="form-group">
                           <label for="inputPhone">Telefono</label>

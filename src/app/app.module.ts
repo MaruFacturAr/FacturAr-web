@@ -79,6 +79,7 @@ import {PopoverModule} from 'ngx-bootstrap/popover';
 import { NotifierModule } from 'angular-notifier';
 import { ActionsTableComponent } from './components/action-table/action.table.component';
 import { FlagTableComponent } from './components/flag-table/flag-table.component';
+import { CustomerComponent } from './views/customer/customer.component';
 
 
 
