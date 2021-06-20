@@ -7,7 +7,6 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { PerfilConsultaComponent } from './views/perfil/perfil-consulta/perfil-consulta.component';
 import { AyudaComponent } from './views/ayuda/ayuda.component';
 import { CompanyComponent } from './views/company/company.component';
-import { ItemComponent } from './views/item/item.component';
 
 export const routes: Routes = [
   {
@@ -61,6 +60,12 @@ export const routes: Routes = [
         path: 'customer',
         data: { title: 'Cliente' },
         loadChildren: () => import('./views/customer/customer.module').then(m => m.CustomerModule),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'salespoint',
+        data: { title: 'Punto de venta' },
+        loadChildren: () => import('./views/salespoint/salespoint.module').then(m => m.SalespointModule),
         canActivate: [AuthGuard]
       },
     ]

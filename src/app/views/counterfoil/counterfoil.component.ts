@@ -126,10 +126,10 @@ export class CounterfoilComponent extends BaseViewComponent implements OnInit {
       }
       try {
         this.counterfoils = counterfoils;
-        sessionStorage.setItem('FAC-ITEMS', JSON.stringify(counterfoils));
+        sessionStorage.setItem('FAC-COUNTERFOILS', JSON.stringify(counterfoils));
       } catch (error) {
           console.warn("Session Storage - Storage OverQuoted");
-          sessionStorage.removeItem("FAC-ITEMS");
+          sessionStorage.removeItem("FAC-COUNTERFOILS");
       }
 
     }

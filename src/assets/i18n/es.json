@@ -115,6 +115,12 @@
         "ActivateCounterfoilQuestion": "¿Está seguro que desea activar el talonario N° {{id}}?",
         "DeactivateCounterfoilQuestion": "¿Está seguro que desea desactivar el talonario N° {{id}}?",
 
+        "ActivateSalespointSuccess": "El punto de venta N° {{id}} fue desactivado correctamente.",
+        "DeactivateSalespointSuccess": "El punto de venta N° {{id}} fue desactivado correctamente.",
+        "RemoveSalespointQuestion": "¿Está seguro que desea eliminar el punto de venta N° {{id}}?",
+        "ActivateSalespointQuestion": "¿Está seguro que desea activar el punto de venta N° {{id}}?",
+        "DeactivateSalespointQuestion": "¿Está seguro que desea desactivar el punto de venta N° {{id}}?",
+
         "ActivateCustomerSuccess": "El Cliente N° {{id}} fue activado correctamente.",
         "DeactivateCustomerSuccess": "El Cliente N° {{id}} fue desactivado correctamente.",
         "RemoveCustomerQuestion": "¿Está seguro que desea eliminar al cliente N° {{id}}?",

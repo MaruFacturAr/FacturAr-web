@@ -91,7 +91,11 @@ export class RoutingState {
                         
                         if(urlAfterRedirects.indexOf("/customer/nuevo")== -1){
                           this._cmxStorageService.removeCustomerStorage();
-                        }         
+                        }  
+                        
+                        if(urlAfterRedirects.indexOf("/salespoint/nuevo")== -1){
+                          this._cmxStorageService.removeSalespointStorage();
+                        }  
                         
       });
   }

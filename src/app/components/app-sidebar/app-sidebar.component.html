@@ -19,11 +19,11 @@
                 <ul class="nav-dropdown-items">
                     <li class="nav-item" *appHasRole='["A"]'>
                         <a class="nav-link" routerLinkActive="active" [routerLink]="['/item/nuevo']">
-                            <i class="fas fa-barcode"></i> Nuevo</a>
+                            <i class="fas fa-plus"></i> Nuevo</a>
                     </li>
                     <li class="nav-item" *appHasRole='["A"]'>
                         <a class="nav-link" routerLinkActive="active" [routerLink]="['/item']">
-                            <i class="fas fa-barcode"></i> Consultar</a>
+                            <i class="fas fa-search"></i> Consultar</a>
                     </li>
                 </ul>
             </li>
@@ -33,11 +33,11 @@
                 <ul class="nav-dropdown-items">
                     <li class="nav-item" *appHasRole='["A"]'>
                         <a class="nav-link" routerLinkActive="active" [routerLink]="['/customer/nuevo']">
-                            <i class="far fa-user"></i> Nuevo</a>
+                            <i class="fas fa-plus"></i> Nuevo</a>
                     </li>
                     <li class="nav-item" *appHasRole='["A"]'>
                         <a class="nav-link" routerLinkActive="active" [routerLink]="['/customer']">
-                            <i class="far fa-user"></i> Consultar</a>
+                            <i class="fas fa-search"></i> Consultar</a>
                     </li>
                 </ul>
             </li>
@@ -50,11 +50,26 @@
                 <ul class="nav-dropdown-items">
                     <li class="nav-item" *appHasRole='["A"]'>
                         <a class="nav-link" routerLinkActive="active" [routerLink]="['/counterfoil/nuevo']">
-                            <i class="fas fa-ticket-alt"></i> Nuevo</a>
+                            <i class="fas fa-plus"></i> Nuevo</a>
                     </li>
                     <li class="nav-item" *appHasRole='["A"]'>
                         <a class="nav-link" routerLinkActive="active" [routerLink]="['/counterfoil']">
-                            <i class="fas fa-ticket-alt"></i> Consultar</a>
+                            <i class="fas fa-search"></i> Consultar</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0)" *appHasRole='["A"]'>
+                    <i class="fas fa-map-marker-alt"></i> Puntos de venta</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item" *appHasRole='["A"]'>
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/salespoint/nuevo']">
+                            <i class="fas fa-plus"></i> Nuevo</a>
+                    </li>
+                    <li class="nav-item" *appHasRole='["A"]'>
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/salespoint']">
+                            <i class="fas fa-search"></i> Consultar</a>
                     </li>
                 </ul>
             </li>

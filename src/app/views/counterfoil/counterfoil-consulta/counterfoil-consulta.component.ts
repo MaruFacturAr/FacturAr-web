@@ -248,7 +248,7 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
  
                //notificaciones = notificaciones.filter(n => n.estado !== notificacionEstado.Eliminada);
                this.loadFromServer(counterfoils);
-             this._notificationService.notify('success', this._translateService.instant('CMXGuias.ActivateCustomerSuccess', {id: data.id}));           
+             this._notificationService.notify('success', this._translateService.instant('CMXGuias.ActivateCounterfoilSuccess', {id: data.id}));           
                
            }
              //sessionStorage.setItem('FAC-ITEMS', JSON.stringify(this.source));
@@ -286,7 +286,7 @@ export class CounterfoilConsultaComponent  extends BaseViewComponent implements 
  
                  //notificaciones = notificaciones.filter(n => n.estado !== notificacionEstado.Eliminada);
                  this.loadFromServer(counterfoils);
-             this._notificationService.notify('success', this._translateService.instant('CMXGuias.DeactivateCustomerSuccess', {id: data.id}));           
+             this._notificationService.notify('success', this._translateService.instant('CMXGuias.DeactivateCounterfoilSuccess', {id: data.id}));           
                
                }
            },
