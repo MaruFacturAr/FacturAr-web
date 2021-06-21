@@ -68,6 +68,12 @@ export const routes: Routes = [
         loadChildren: () => import('./views/salespoint/salespoint.module').then(m => m.SalespointModule),
         canActivate: [AuthGuard]
       },
+      {
+        path: 'voucher',
+        data: { title: 'Punto de venta' },
+        loadChildren: () => import('./views/voucher/voucher.module').then(m => m.VoucherModule),
+        canActivate: [AuthGuard]
+      },
     ]
   },
   { path: 'login', component: LoginComponent },

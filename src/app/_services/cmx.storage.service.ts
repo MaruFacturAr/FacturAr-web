@@ -117,5 +117,11 @@ export class CMXStorageService {
     sessionStorage.removeItem("FAC-SALESPOINTS");
     sessionStorage.removeItem("FAC-SALESPOINTS-FILTROS");
   }
+
+  public removeVoucherStorage(){
+    sessionStorage.removeItem("FAC-VOUCHER");
+    sessionStorage.removeItem("FAC-VOUCHERS");
+    sessionStorage.removeItem("FAC-VOUCHERS-FILTROS");
+  }
   
 }

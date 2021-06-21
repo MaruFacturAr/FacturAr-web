@@ -96,6 +96,11 @@ export class RoutingState {
                         if(urlAfterRedirects.indexOf("/salespoint/nuevo")== -1){
                           this._cmxStorageService.removeSalespointStorage();
                         }  
+
+                        if(urlAfterRedirects.indexOf("/voucher/nuevo")== -1){
+                          this._cmxStorageService.removeVoucherStorage();
+                        }  
+
                         
       });
   }
