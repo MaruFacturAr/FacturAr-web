@@ -80,6 +80,7 @@ import { NotifierModule } from 'angular-notifier';
 import { ActionsTableComponent } from './components/action-table/action.table.component';
 import { FlagTableComponent } from './components/flag-table/flag-table.component';
 import { CustomerComponent } from './views/customer/customer.component';
+import { InvoiceActionComponent } from './components/invoice-action/invoice-action.component';
 
 
 
@@ -201,7 +202,8 @@ const DIRECTIVES = [
     AppMenuComponent,
    // ServicioMoaNoDelegadoComponent,
     UserRegisterComponent,
-   CompanyComponent
+   CompanyComponent,
+   InvoiceActionComponent
     
   ],
   entryComponents: [

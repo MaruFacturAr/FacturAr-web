@@ -74,6 +74,12 @@ export const routes: Routes = [
         loadChildren: () => import('./views/voucher/voucher.module').then(m => m.VoucherModule),
         canActivate: [AuthGuard]
       },
+      {
+        path: 'invoice',
+        data: { title: 'Factura' },
+        loadChildren: () => import('./views/invoice/invoice.module').then(m => m.InvoiceModule),
+        canActivate: [AuthGuard]
+      },
     ]
   },
   { path: 'login', component: LoginComponent },

@@ -101,6 +101,10 @@ export class RoutingState {
                           this._cmxStorageService.removeVoucherStorage();
                         }  
 
+                        if(urlAfterRedirects.indexOf("/invoice/nuevo")== -1){
+                          this._cmxStorageService.removeInvoiceStorage();
+                        }  
+
                         
       });
   }

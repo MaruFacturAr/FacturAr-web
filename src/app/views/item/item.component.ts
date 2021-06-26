@@ -29,7 +29,7 @@ export class ItemComponent extends BaseViewComponent implements OnInit {
   item_types = [{ id: 1, name: 'Producto' },
   { id: 2, name: 'Servicio' },
   { id: 3, name: 'Producto y Servicio' }];
-  currency: any = [{ id: 2, name: 'PESOS' }, { id: 3, name: 'Dólar ESTADOUNIDENSE' }];
+  currency: any = [{ id: 2, name: 'Pesos' }, { id: 3, name: 'Dólar' }];
 
   CMXFormGroup = new FormGroup({
 

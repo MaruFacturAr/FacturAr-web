@@ -88,6 +88,23 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="nav-title text-center" *appHasRole='["A","800"]'><span>Mis Facturas</span></li>
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0)" *appHasRole='["A"]'>
+                    <i class="fas fa-file-invoice"></i> Facturas</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item" *appHasRole='["A"]'>
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/invoice/nuevo']">
+                            <i class="fas fa-plus"></i> Nuevo</a>
+                    </li>
+                    <li class="nav-item" *appHasRole='["A"]'>
+                        <a class="nav-link" routerLinkActive="active" [routerLink]="['/invoice']">
+                            <i class="fas fa-search"></i> Consultar</a>
+                    </li>
+                </ul>
+            </li>
+
             <!-- <li class="nav-item" *appHasRole='["A","800"]'>
                 <a class="nav-link" routerLinkActive="active" [routerLink]="['/declaraciones']">
                     <i class="fas fa-archive"></i> Productos

@@ -211,7 +211,7 @@ export abstract class BaseViewComponent {
 
         return hasRole;
     }
-
+    
     protected exportToExcel(event) {
         
         this.exportToExcelDisabled = true;

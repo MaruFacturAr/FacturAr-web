@@ -1,0 +1,146 @@
+<div class="card shadow-sm">
+    <div class="card-header formTitle">
+        <div class="row">
+            <div class="col-6">
+                <h5 class="mb-0">
+                    <i class="fas fa-file-invoice"></i>  Factura de venta
+                    <!-- <fa-icon [icon]='faFileInvoice' class='mr-2'></fa-icon> {{ 'CMXEstadoCuenta.ComprobantePago' | translate }} -->
+                </h5>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="CMXFormGroup" (ngSubmit)="onSave()">
+        <div class="card-body">
+          <div class="row" *ngIf="company == null">
+            <div class="col">
+                <div class="alert alert-danger">
+                    <span class="alert-heading">
+                        <i class="fas fa-exclamation-triangle"></i> IMPORTANTE: Debe completar la info Negocio antes de
+                        crear una factura.
+                    </span>
+                </div>
+            </div>
+        </div>
+            <!-- <h1 class="display-6 mb-3 pb-2 border-bottom border-secondary">Datos Facturación</h1> -->
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <label for="inputCustomer_id">Cliente</label>
+                    <select id="inputCustomer_id" class="form-control" formControlName="customer_id" >
+                      <option *ngFor="let t of customers" [ngValue]="t.id">
+                        {{t.billing_data_id.legal_name}}
+                    </option>                
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputVoucher_id">Comprobante</label>
+                    <select id="inputVoucher_id" class="form-control" formControlName="voucher_id" >
+                      <option *ngFor="let t of vouchers" [ngValue]="t.id">
+                        {{t.name}}
+                    </option>                
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputEmisionDate">Fecha</label>
+                    <input type="tex" class="form-control" id="inputEmisionDate" formControlName="emision_date" bsDatepicker [bsConfig]="bsConfig" [maxDate]="maxDate">
+                  </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="inputCounterfoil_id">Talonario</label>
+                  <select id="inputCounterfoil_id" class="form-control" formControlName="counterfoil_id" >
+                    <option *ngFor="let t of counterfoils" [ngValue]="t.id">
+                      {{t.name}}
+                  </option>                
+                  </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputSalePoint_id">Punto de venta</label>
+                    <select id="inputSalePoint_id" class="form-control" formControlName="sale_point_id" >
+                      <option *ngFor="let t of salesPoints" [ngValue]="t.id">
+                        {{t.afip_code}}
+                    </option>                
+                    </select>
+                  </div>
+                <div class="form-group col-md-4">
+                    <label for="inputNumber">Numero</label>
+                    <input type="number" class="form-control" id="inputNumber" formControlName="number">
+                  </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputSale_condition_id">Condición de venta</label>
+                    <select id="inputSale_condition_id" class="form-control" formControlName="sale_condition_id" >
+                      <option *ngFor="let t of salesCondition" [ngValue]="t.id">
+                        {{t.name}}
+                    </option>                
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputExpiration_date">Fecha de Pago</label>
+                    <input type="tex" class="form-control" id="inputExpiration_date" formControlName="expiration_date" bsDatepicker [bsConfig]="bsConfig" [maxDate]="maxDate">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputCurrencyId">Moneda</label>
+                    <select id="inputCurrencyId" class="form-control" formControlName="currencyId" >
+                      <option *ngFor="let t of currency" [ngValue]="t.id">
+                        {{t.name}}
+                    </option>                
+                    </select>
+                  </div>
+              
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputItemType">Tipo de Operación</label>
+                    <select id="inputItemType" class="form-control" formControlName="item_type" >
+                      <option *ngFor="let r of item_types" [ngValue]="r.id">
+                        {{r.name}}
+                    </option>                
+                    </select>
+                  </div>
+                <div class="form-group col-md-6">
+                    <label>Periodo de Facturación</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" bsDaterangepicker [bsConfig]="bsConfig" formControlName="service_date" [maxDate]="maxDate" onkeydown="return false" />
+                        <div class="btn-group btn-group-sm cmx-button-group" role="group">
+                            <button class="btn btn-outline-primary" type="button" tooltip="Último mes" (click)="changeDays(30, 'FechaOficializacion')"><i class="fas fa-caret-left mr-1"></i>1 mes</button>
+                            <button class="btn btn-outline-primary" type="button" tooltip="Últimos 3 meses" (click)="changeDays(90, 'FechaOficializacion')"><i class="fas fa-caret-left mr-1"></i>3 meses</button>
+                            
+                        </div>
+                    </div>
+                </div>
+              </div>
+            
+              <h1 class="display-6 mb-3 pb-2 border-bottom border-secondary">Detalle</h1>
+              <div class="d-flex bd-highligh mb-2">
+                <div class="flex-grow-1 bd-highlight  d-lg-block">
+                    <button class="btn btn-outline-primary" type="button" > 
+                        <i class="fas fa-plus mr-2"></i> Agregar Productos/Servicios
+                    </button>
+                </div>
+            </div>
+              <div class="form-row">
+                <!-- <div class="form-group col-md-6">
+                  <label for="inputCity">Localidad</label>
+                  <input type="text" class="form-control" id="inputCity" formControlName="city" >
+                </div> -->
+                
+                <!-- <div class="form-group col-md-2">
+                            <label for="inputZip">Codigo Postal</label>
+                            <input type="text" class="form-control" id="inputZip">
+                          </div> -->
+              </div>
+        </div>
+        
+        <div class="card-footer">
+            <div class="row">
+                <div class="col text-right">
+                    <!-- <label  class="col-sm-4 col-form-label">{{appFileUploadR.uploader?.queue.length}}</label> -->
+                    <button class="btn btn-primary" type="submit"  [disabled]="!CMXFormGroup.valid" >
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

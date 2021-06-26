@@ -124,4 +124,9 @@ export class CMXStorageService {
     sessionStorage.removeItem("FAC-VOUCHERS-FILTROS");
   }
   
+  public removeInvoiceStorage(){
+    sessionStorage.removeItem("FAC-INVOICE");
+    sessionStorage.removeItem("FAC-INVOICES");
+    sessionStorage.removeItem("FAC-INVOICES-FILTROS");
+  }
 }
