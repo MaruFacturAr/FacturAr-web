@@ -101,7 +101,7 @@ export class InvoiceConsultaComponent extends BaseViewComponent implements OnIni
              this.totalRows = result.length;
  
              this.filtros = Object.assign({}, this.CMXFormGroup.value);
-             sessionStorage.setItem('FAC-VOUCHERS-FILTROS', JSON.stringify(this.filtros));
+             sessionStorage.setItem('FAC-INVOICES-FILTROS', JSON.stringify(this.filtros));
  
              this.source.load(result);
              this.calculatePaginatorText(1, this.totalRows);
@@ -160,12 +160,12 @@ export class InvoiceConsultaComponent extends BaseViewComponent implements OnIni
  }
  
  
- loadFromServer(invoices: Invoice[]) {
+ loadFromServer(invoices:any) {
    this.createFormFiltersTags(this.CMXFormGroup);
  
    try {
      this.invoices = invoices;
-     sessionStorage.setItem('FAC-INVOICESS', JSON.stringify(invoices));
+     sessionStorage.setItem('FAC-INVOICES', JSON.stringify(invoices));
    } catch (error) {
        console.warn("Session Storage - Storage OverQuoted");
        sessionStorage.removeItem("FAC-INVOICES");
@@ -244,7 +244,7 @@ export class InvoiceConsultaComponent extends BaseViewComponent implements OnIni
           instance.viewFactura.subscribe((row) => {
 
             let pdfObject:PDFSource = {
-              url : CMXConfig.environment.apiURL  + '/invoices/pdfDummy/1',
+              url : CMXConfig.environment.apiURL  + '/facturas/create-pdf/' + row.id,
               httpHeaders: {
                 'Content-Type' : 'application/json; charset=utf-8',
                 'Accept' : 'application/json',
@@ -266,7 +266,32 @@ export class InvoiceConsultaComponent extends BaseViewComponent implements OnIni
       }
       },  
        id: { title: 'id'},
-       number: { title: 'Numero'},
+       voucher:{ title: 'Factura',
+       type:'string',
+       valuePrepareFunction: (cell, row) => {
+        return row.voucher.name;
+      }
+      },
+      sale_point:{ title: 'Pto de venta',
+       type:'string',
+       valuePrepareFunction: (cell, row) => {
+        return row.sale_point.name;
+      }
+      },
+      number: { title: 'Numero'},
+      legal_name: { title: 'Cliente',
+       type:'string',
+       valuePrepareFunction: (cell, row) => {
+        return row.customer.billing_data_id.legal_name;
+    }
+      },
+       estado: { title: 'Estado',
+       type:'string',
+       valuePrepareFunction: (cell, row) => {
+        return "Creada";
+       }
+      },
+       
    
  
    }

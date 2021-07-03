@@ -1,0 +1,142 @@
+/* Draggable*/
+
+.drag-border {
+    border: #ff525b dashed 2px;
+}
+
+.drag-handle {
+    cursor: move;
+    /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+.drag-scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.drag-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.drag-scroll::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.drag-scroll::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.drag-scroll {
+    height: 20rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 11px;
+}
+
+.drag-scroll>div {
+    width: 105.5%;
+    border-bottom: solid 1px #eee;
+}
+
+.drag-scroll>div:last-child {
+    border-bottom: 0;
+}
+
+.drag-scroll:not(.noGrab)>div:hover {
+    cursor: grab;
+}
+
+.drag-scroll>div:hover {
+    background-color: #f1f1f1;
+}
+
+.drag-title {
+    font-size: 11px;
+}
+
+.drop-row {
+    border: dashed 3px #eee;
+    background: url('../../../../../src/assets/img/DropArea.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 21.5rem;
+}
+
+.dndDragging {
+    border: 1px solid green;
+    cursor: grabbing;
+}
+
+.dndDraggingSource {
+    display: none;
+}
+
+.dndPlaceholder {
+    min-height: 72px;
+    border: 1px dashed green;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.loader,
+.loader:after {
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+}
+
+.loader {
+    margin: auto;
+    font-size: 3px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: .5em solid rgba(32, 168, 216, 0.2);
+    border-right: .5em solid rgba(32, 168, 216, 0.2);
+    border-bottom: .5em solid rgba(32, 168, 216, 0.2);
+    border-left: .5em solid #20a8d8;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+}
+
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .drag-scroll {
+        height: auto;
+        max-height: 20rem;
+    }
+    .drop-row {
+        border: 0;
+        background: none;
+    }
+}

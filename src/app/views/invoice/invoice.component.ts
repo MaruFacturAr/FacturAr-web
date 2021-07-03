@@ -7,7 +7,10 @@ import { CMXAnimations } from 'app/_helpers/animations';
 import { Company } from 'app/_models/company.model';
 import { Counterfoil } from 'app/_models/counterfoil.model';
 import { Customer } from 'app/_models/customer.model';
+import { InvoiceItem } from 'app/_models/invoice.item.model';
 import { Invoice } from 'app/_models/invoice.model';
+import { Item } from 'app/_models/item.model';
+import { ItemTemp } from 'app/_models/item.temp.model';
 import { SalesPoint } from 'app/_models/sales.point.model';
 import { Voucher } from 'app/_models/voucher.model';
 import { AuthenticationService } from 'app/_services/authentication.service';
@@ -16,12 +19,14 @@ import { CounterfoilService } from 'app/_services/counterfoil.service';
 import { CustomerService } from 'app/_services/customer.service';
 import { ExcelService } from 'app/_services/excel.service';
 import { InvoiceService } from 'app/_services/invoice.service';
+import { ItemService } from 'app/_services/item.service';
 import { SalesPointService } from 'app/_services/sales.point.service';
 import { VoucherService } from 'app/_services/voucher.service';
 import { sub } from 'date-fns';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { SessionStorageService } from 'ngx-webstorage';
 import { BaseViewComponent } from '../base.view.component';
+import { DragDropItemComponent } from './drag-drop-item/drag-drop-item.component';
 
 @Component({
   selector: 'app-invoice',
@@ -31,6 +36,10 @@ import { BaseViewComponent } from '../base.view.component';
 })
 export class InvoiceComponent extends BaseViewComponent implements OnInit {
 
+  public items:any;
+  public busqueda:any;
+
+  isService:Boolean=false;
   company: Company;
   customers = new Array<Customer>();
   vouchers = new Array<Voucher>();
@@ -80,6 +89,7 @@ item_types = [{ id: 1, name: 'Productos' },
     private _counterfoilService: CounterfoilService,
     private _salesPointService: SalesPointService,
     private _companyService: CompanyService,
+    private _itemService: ItemService,
     private _modalService: BsModalService,
     _router: Router,
     _excelService: ExcelService,
@@ -99,8 +109,9 @@ item_types = [{ id: 1, name: 'Productos' },
     );
 
     this.company = JSON.parse(sessionStorage.getItem("FAC-COMPANY"));
-     //this.customers = JSON.parse(sessionStorage.getItem('FAC-CUSTOMERS'));
-    //this.customer = JSON.parse(sessionStorage.getItem("FAC-CUSTOMER"));
+    this.items = JSON.parse(sessionStorage.getItem('FAC-ITEMS-AGREGADAS'));
+    this.busqueda = JSON.parse(sessionStorage.getItem('FAC-ITEMS-BUSQUEDA'));
+ 
     
     if(this.customers.length == 0)
     this._customerService.getAll().subscribe((result) =>{
@@ -122,8 +133,23 @@ item_types = [{ id: 1, name: 'Productos' },
       this.vouchers = result;
     });
 
-   
+    this.isLoading = true;
+     this._itemService.getAll().subscribe((result) =>{
+      this.isLoading = false;
+      debugger;
      
+      if(result) {
+        
+        try {
+          this.busqueda = result;
+          sessionStorage.setItem('FAC-ITEMS-BUSQUEDA', JSON.stringify(result));
+
+        } catch (e) {
+          console.warn("Session Storage - Storage OverQuoted");
+          sessionStorage.removeItem('FAC-ITEMS-BUSQUEDA');
+        }
+      }
+    });
   }
 
   ngOnInit() {
@@ -132,64 +158,68 @@ item_types = [{ id: 1, name: 'Productos' },
    
   }
 
-  // translateCustomerToForm() {
-  //   if (this.customer) {
-  //     this.CMXFormGroup.patchValue({
-        
-  //       fantasy_name: this.customer.billing_data_id.fantasy_name,
-  //       legal_name: this.customer.billing_data_id.legal_name,
-  //       document_type_id: this.customer.billing_data_id.document.document_type_id,
-  //       number: this.customer.billing_data_id.document.number,
-  //       taxpayer_type_id: this.customer.billing_data_id.taxpayer_type_id,
-  //       email: this.customer.billing_data_id.email,
-  //       country_code: this.customer.billing_data_id.phone.country_code,
-  //       city_code: this.customer.billing_data_id.phone.city_code,
-  //       phone_number: this.customer.billing_data_id.phone.number,
-  //       extension: this.customer.billing_data_id.phone.extension,
-  //       street: this.customer.billing_data_id.address.street,
-  //       city: this.customer.billing_data_id.address.city,
-  //       province: this.company.billingData.address.province_id
-  //     });
-  //   }
-  // }
-
+ 
   map():Invoice{
     let invoice = new Invoice();
-    return invoice;
-    // if(this.customer == null)
-    // {
-    //   this.initialCustomer();
-    // }
+    invoice.company_id = this.company.id;
+    invoice.amount_net = this.CMXFormGroup.get("amount_net").value;
+    invoice.amount_op_ex = 0;
+    invoice.counterfoils_id = this.CMXFormGroup.get("counterfoil_id").value;
+    invoice.created_date = new Date();
+    invoice.currency_id = this.CMXFormGroup.get("currencyId").value;
+    invoice.customer_id = this.CMXFormGroup.get("customer_id").value;
+    invoice.emision_date = this.CMXFormGroup.get("emision_date").value;
+    invoice.expiration_date = this.CMXFormGroup.get("expiration_date").value[0];
+    invoice.invoice_status_type_id = 1;
+    invoice.number = this.CMXFormGroup.get("number").value;
+    invoice.observations = "";
+    invoice.letter = "C";
+    invoice.sale_condition_id = this.CMXFormGroup.get("sale_condition_id").value;
+    invoice.sale_point_id = this.CMXFormGroup.get("sale_point_id").value;
+    invoice.service_date_from = this.CMXFormGroup.get("service_date").value[0];
+    invoice.service_date_to = this.CMXFormGroup.get("service_date").value[1];
+    invoice.total_amount = this.CMXFormGroup.get("total_amount").value;
+    invoice.total_amount_conc = this.CMXFormGroup.get("total_amount").value;
+    invoice.total_ivas = this.CMXFormGroup.get("total_ivas").value;
+    invoice.total_taxes = this.CMXFormGroup.get("total_taxes").value;
+    invoice.userId = this.currentUser.id;
+    invoice.voucher_id = this.CMXFormGroup.get("voucher_id").value;
+    invoice.total_records = 1;
+    invoice.invoiceItemList = new Array<InvoiceItem>();
+    invoice.cae = "";
+    invoice.cae_expiration_date = new Date();
+    invoice.id = 0;
+
+
+    this.items.forEach((element:ItemTemp) => {
+      let it = new InvoiceItem();
+      it.invoice_id = 0;
+      it.amount_item = element.price;
+      it.amount_ivas = 0;
+      it.amount_op_ex = 0;
+      it.amount_taxes = 0;
+      it.quantity = element.quantity;
+      it.item_id = element.id;
+      it.id = 0;
+      
+      invoice.invoiceItemList.push(it);
+      
+    });
     
-    // this.customer.billing_data_id.fantasy_name = this.CMXFormGroup.get("fantasy_name").value;
-    // this.customer.billing_data_id.legal_name = this.CMXFormGroup.get("legal_name").value;
-    // this.customer.billing_data_id.document.document_type_id = this.CMXFormGroup.get("document_type_id").value;
-    // this.customer.billing_data_id.document.number = this.CMXFormGroup.get("number").value;
-    // this.customer.billing_data_id.taxpayer_type_id = this.CMXFormGroup.get("taxpayer_type_id").value;
-    // this.customer.billing_data_id.email = this.CMXFormGroup.get("email").value;
-    // this.customer.billing_data_id.address.country_id=61;
-    // this.customer.billing_data_id.address.address_type_id =2;
-    // this.customer.billing_data_id.address.city = this.CMXFormGroup.get("city").value;
-    // this.customer.billing_data_id.address.street = this.CMXFormGroup.get("street").value;
-    // this.customer.billing_data_id.address.province_id = this.CMXFormGroup.get("province").value;
-    // this.customer.billing_data_id.phone.phone_type_id = 1;
-    // this.customer.billing_data_id.phone.city_code = this.CMXFormGroup.get("city_code").value;
-    // this.customer.billing_data_id.phone.country_code = this.CMXFormGroup.get("country_code").value;
-    // this.customer.billing_data_id.phone.extension = this.CMXFormGroup.get("extension").value;
-    // this.customer.billing_data_id.phone.number = this.CMXFormGroup.get("phone_number").value;
-    // this.customer.company_id = this.company.id;
-    // this.customer.status_id = 1;
-    // this.customer.userId = this.currentUser.id;
+
+    return invoice;
+   
 
   }
   
 
   onSave(){
     
-    this._invoiceService.register(this.map()).subscribe((result:Invoice)=>{
+    this._invoiceService.register(this.map()).subscribe((result:any)=>{
      
         this.CMXFormGroup.reset();
         this._notificationService.notify('success', "Se grabó correctamente");
+        this._router.navigate(['/invoice/detalle/' + result.id])
       }, error => {
         this._notificationService.notify('error', error);
       });
@@ -201,6 +231,102 @@ item_types = [{ id: 1, name: 'Productos' },
     const to:Date = new Date();
 
     this.CMXFormGroup.get(control).setValue([from, to]);
+}
+
+
+onClickAddItems() {
+  let modalConfig:any = {
+    initialState: {
+    itemsLeft: this.busqueda,
+    itemsRight: this.items,
+    isLoading: this.isLoading,
+    currentUser: this.currentUser
+    },
+    class:'modal-lg'
+  };
+  this.bsModalRef = this._modalService.show(DragDropItemComponent, modalConfig);
+  this.bsModalRef.content.onRightItemsChanged.subscribe((value) => {
+
+   this.onItemsChange(value);
+    console.log(value) // here value passed on clicking ok will be printed in console. Here true will be printed if OK is clicked
+    //return value;
+ }, (err) => {
+    // return false;
+});
+ }
+
+onItemsChange(items:Array<ItemTemp>){
+  this.items = items;
+  sessionStorage.setItem('FAC-ITEMS-AGREGADAS', JSON.stringify(items));
+  this.setTotals()
+}
+
+onChangeQuantity(event, item:ItemTemp){
+  item.total = event.target.value * item.price;
+  this.setTotals();
+}
+
+onChangeVoucher(event){
+  debugger;
+
+  let result = this.CMXFormGroup.get("voucher_id").value;
+    console.log(result);
+  let voucher = this.vouchers.find( x => x.id == result);
+  this.CMXFormGroup.get("sale_point_id").setValue(voucher.sales_point_id);
+  this.CMXFormGroup.get("counterfoil_id").setValue(voucher.counterfoil_id);
+
+  let counterfoil = this.counterfoils.find( x => x.id == voucher.counterfoil_id);
+  this.CMXFormGroup.get("number").setValue(counterfoil.next_number);
+  
+
+}
+
+onChangeCounterfoil(event){
+
+  let result =   this.CMXFormGroup.get("counterfoil_id").value;
+ 
+  let counterfoil = this.counterfoils.find( x => x.id == result);
+  this.CMXFormGroup.get("number").setValue(counterfoil.next_number);
+
+}
+
+onChangeItemType(event){
+  let result = this.CMXFormGroup.get("item_type").value;
+  this.isService = (result === 2 || result == 3);
+}
+
+onChangeSaleCondition(event){
+  let result =   this.CMXFormGroup.get("sale_condition_id").value;
+ 
+  let salesCondition = this.salesCondition.find( x => x.id == result);
+
+  this.changeDays(salesCondition.days, 'expiration_date');
+  
+}
+
+onRemove(item:any){
+    
+  this.removeItem(item, this.items);
+  this.setTotals();
+}
+
+removeItem(item: any, list: Array<any>) {
+  let index = list.map(function (e) {
+    return e.id
+  }).indexOf(item.id);
+  list.splice(index, 1);
+}
+
+setTotals():void{
+  let importeTotal:number=0;
+  this.items.forEach(element => {
+   importeTotal += element.price * element.quantity;
+    
+  });
+  this.CMXFormGroup.get("amount_net").setValue(importeTotal);
+  this.CMXFormGroup.get("total_ivas").setValue(0);
+  this.CMXFormGroup.get("total_taxes").setValue(0);
+  this.CMXFormGroup.get("total_amount").setValue(importeTotal);
 }
 
   protected observableForExcelReport() {

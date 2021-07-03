@@ -8,6 +8,7 @@ export class  InvoiceItem implements Deserializable {
     amount_op_ex: number;
     amount_taxes: number;
     id: number;
+    invoice_id: number;
     invoiceItemIvaList: InvoiceItemIva[];
     invoiceItemTaxList: InvoiceItemTax[];
     item_id: number;

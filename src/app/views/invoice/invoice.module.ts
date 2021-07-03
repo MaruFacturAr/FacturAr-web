@@ -20,17 +20,24 @@ import { CounterfoilService } from 'app/_services/counterfoil.service';
 import { CustomerService } from 'app/_services/customer.service';
 import { SalesPointService } from 'app/_services/sales.point.service';
 import { VoucherService } from 'app/_services/voucher.service';
+import { DragDropItemComponent } from './drag-drop-item/drag-drop-item.component';
+import { DndModule } from 'ngx-drag-drop';
+import { ItemService } from 'app/_services/item.service';
+import { InvoicePdfComponent } from './invoice-pdf/invoice-pdf.component';
+
+
 
 const routes: Routes = [
   { path: '', component: InvoiceConsultaComponent, data: { title: 'Consulta' } },
   { path: 'nuevo', component: InvoiceComponent, data: { title: 'Alta de Factura venta' } },
- 
+  { path: 'detalle/:id', component: InvoicePdfComponent, data: { title: 'Factura N°' } }
 ];
 
 @NgModule({
-  declarations: [InvoiceComponent, InvoiceConsultaComponent],
+  declarations: [InvoiceComponent, InvoiceConsultaComponent, DragDropItemComponent, InvoicePdfComponent],
   imports: [
     CommonModule,
+    DndModule,
      DateFnsModule.forRoot(),
      AppPdfViewerModule,
      FormsModule,
@@ -49,8 +56,10 @@ const routes: Routes = [
              }
          }),
          RouterModule.forChild(routes)
+        
    ],
    entryComponents: [
+    DragDropItemComponent
      
  ],
    providers: [
@@ -58,7 +67,9 @@ const routes: Routes = [
      CustomerService,
      CounterfoilService,
      SalesPointService,
-     VoucherService
+     VoucherService,
+     DragDropItemComponent,
+     ItemService
  ]
 })
 export class InvoiceModule { }

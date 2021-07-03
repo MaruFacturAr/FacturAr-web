@@ -128,5 +128,8 @@ export class CMXStorageService {
     sessionStorage.removeItem("FAC-INVOICE");
     sessionStorage.removeItem("FAC-INVOICES");
     sessionStorage.removeItem("FAC-INVOICES-FILTROS");
+    sessionStorage.removeItem("FAC-ITEMS-AGREGADAS");
+    sessionStorage.removeItem("FAC-ITEMS-BUSQUEDA");
+
   }
 }

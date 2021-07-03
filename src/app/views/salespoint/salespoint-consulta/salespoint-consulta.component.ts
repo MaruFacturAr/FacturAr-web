@@ -348,7 +348,7 @@ export class SalespointConsultaComponent extends BaseViewComponent implements On
  
            instance.modificar.subscribe((row) => {                
              
-             sessionStorage.setItem('FAC-SALESPOINTS', JSON.stringify(row));
+             sessionStorage.setItem('FAC-SALESPOINT', JSON.stringify(row));
              this.resetForm();
  
              this._router.navigate(['salespoint/nuevo']);

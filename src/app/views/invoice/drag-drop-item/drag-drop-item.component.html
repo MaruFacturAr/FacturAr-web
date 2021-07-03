@@ -1,0 +1,141 @@
+<div>
+    <form class="m-2">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card card-outline-primary mb-3">
+
+                    <div class="card-header card-inverse card-primary">Producto/Servicios</div>
+
+                    <div class="card-body drag-title pr-4 pl-4">
+
+                        <div class="loader" *ngIf="isLoading" [@showHideInfo]></div>
+
+                        <div class="row form-group"
+                            *ngIf="itemsLeft.length > 1 && !(itemLeftFiltered.length == 0 && itemsLeft?.length <= itemsRight?.length)">
+                            <div class="col-12 p-0">
+                                <input type="text" class="form-control"
+                                    placeholder="{{ 'CMXGuias.SearchPlaceHolder' | translate }}" #fD
+                                    (keyup)="doFilter('left', fD.value)">
+                            </div>
+                        </div>
+
+                        <div class="row"
+                            *ngIf="itemLeftFiltered.length == 0 || (itemsLeft.length > 0 && itemLeftFiltered.length == 0 && itemsLeft?.length <= itemsRight?.length)">
+                            <div class="col">
+                                <div class="alert alert-warning">
+                                    <span class="alert-heading">
+                                        <i class="fas fa-exclamation-triangle"></i> {{ 'CMXGuias.NoLeftItems' |
+                                        translate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row bg-primary pt-1 pb-1 d-none d-sm-flex" *ngIf="itemLeftFiltered.length > 0">
+                            <div class="col-10 col-sm-11">
+                                <div class="row">
+                                    <div class="col-2 text-truncate" placement="top" tooltip="CODIGO">CODIGO</div>
+                                    <div class="col-4 text-truncate" placement="top" tooltip="NOMBRE">NOMBRE</div>
+                                    <div class="col-4 text-truncate" placement="top" tooltip="PRECIO">PRECIO</div>
+                                </div>
+                            </div>
+                            <div class="col-2 col-sm-1"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col drag-scroll">
+
+                                <div draggable *ngFor="let item of itemLeftFiltered" [dndDraggable]="item"
+                                    dndEffectAllowed="move" class="row pt-2 pb-2" [@showHideGuiasOperacion]>
+
+                                    <div class="col-8 col-sm-10">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                {{item.code}}
+                                            </div>
+                                            <div class="col-3">
+                                                {{item.name}}
+                                            </div>
+                                            <div class="col-3">
+                                                ARS {{item.price}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 col-sm-1">
+                                        <button class="btn btn-sm btn-light"
+                                            tooltip="{{ 'CMXGeneral.Agregar' | translate }}" placement="left"
+                                            (click)="onAdd(item)">
+                                            <i class="fas fa-plus text-secondary-cmx"></i>
+                                        </button>
+                                        <!-- <fa-icon [icon]='faExclamationTriangle' class='text-danger border border-danger rounded p-1' style="font-size:1rem;" *ngIf="item.errorMsg" tooltip="{{item.errorMsg}}" placement="left" container="body"></fa-icon> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card card-outline-primary mb-3">
+                    <div class="card-header card-inverse card-primary">Productos/Servicios seleccionados</div>
+                    <div class="card-body drag-title pr-4 pl-4">
+
+                        <div class="row form-group">
+                            <div class="col-12 p-0">
+                                <input type="text" class="form-control"
+                                    placeholder="{{ 'CMXGuias.SearchPlaceHolder' | translate }}" #fS
+                                    (keyup)="doFilter('right', fS.value)" [disabled]="itemsRight?.length <= 1">
+                            </div>
+                        </div>
+
+                        <div class="row bg-primary pt-1 pb-1 d-none d-sm-flex" *ngIf="itemRightFiltered.length > 0"
+                            [@showHideGuiasOperacion]>
+                            <div class="col-10 col-sm-11">
+                                <div class="row">
+                                    <div class="col-2 text-truncate" placement="top" tooltip="CODIGO">CODIGO</div>
+                                    <div class="col-4 text-truncate" placement="top" tooltip="NOMBRE">NOMBRE</div>
+                                    <div class="col-2 text-truncate" placement="top" tooltip="PRECIO">PRECIO</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col drag-scroll noGrab" [ngClass]="{'drop-row': itemRightFiltered.length == 0}"
+                                dndDropzone (dndDrop)="onitemsRightDrop($event)">
+                                <div *ngFor="let item of itemRightFiltered" class="row pt-2 pb-2"
+                                    [@showHideGuiasOperacion]>
+                                    <div class="col-8 col-sm-10">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                {{item.code}}
+                                            </div>
+                                            <div class="col-3">
+                                                {{item.name}}
+                                            </div>
+                                            <div class="col-3">
+                                                ARS {{item.price}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 col-sm-1">
+                                        <button class="btn btn-sm btn-light"
+                                            tooltip="{{ 'CMXGeneral.Quitar' | translate }}" placement="left"
+                                            (click)="onRemove(item)">
+                                            <i class="fas fa-trash text-secondary-cmx"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" (click)="onSave()" [disabled]="!true">Guardar</button>
+
+    </form>
+
+</div>

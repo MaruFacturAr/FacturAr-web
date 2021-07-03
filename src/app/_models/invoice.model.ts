@@ -9,7 +9,7 @@ export class Invoice implements Deserializable {
     company_id: number;
     counterfoils_id: number;
     created_date: Date;
-    currencyId: number;
+    currency_id: number;
     customer_id: number;
     emision_date: Date;
     expiration_date: Date;
